@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diagnóstico NEX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: uma coluna central (máx. 720px), formulário em etapas com barra de progresso; resultado em barras por área */
+:root{
+  --bg:#07060f; --surface:#120a33; --surface-2:#1a1045; --line:rgba(160,130,255,.22); --line-strong:rgba(160,130,255,.5);
+  --fg:#f3f0ff; --muted:#b9b0e0; --dim:#8a80b8; --accent:#5B2BFF; --accent-rgb:91,43,255; --accent-2:#3FE0FF;
+  --crit:#ff6b81; --warn:#ffb547; --ok:#3ddc97;
+  --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"Manrope",ui-sans-serif,system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  color-scheme:dark;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{min-height:100vh;background:
+  radial-gradient(900px 500px at 15% -10%,rgba(var(--accent-rgb),.35),transparent 60%),
+  radial-gradient(700px 500px at 110% 20%,rgba(63,224,255,.10),transparent 60%),var(--bg);
+  color:var(--fg);font:16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;z-index:-1;
+  background-image:radial-gradient(rgba(255,255,255,.5) 1px,transparent 1.2px);background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 10%,transparent 70%);mask-image:radial-gradient(ellipse at 50% 0%,#000 10%,transparent 70%)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);letter-spacing:-.035em;line-height:1.05;margin:0;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:2px solid var(--accent-2);outline-offset:3px}
+.wrap{max-width:720px;margin:0 auto;padding-block:28px 80px}
+
+/* Topo */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:40px}
+.top a.back{font-size:14px;color:var(--muted);text-decoration:none;display:inline-flex;gap:8px;align-items:center}
+.top a.back:hover{color:var(--fg)}
+.logo svg{height:24px;width:auto;fill:#5B2BFF;filter:drop-shadow(0 0 10px rgba(91,43,255,.6));display:block}
+
+/* Intro */
+.eyebrow{font:500 12px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#b9a3ff}
+.intro h1{font-size:clamp(32px,6vw,48px);margin-top:12px}
+.intro p{margin-top:14px;color:var(--muted);font-size:17px;max-width:600px}
+.meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;font:500 12px var(--f-mono);color:var(--dim)}
+
+/* Progresso */
+.progress{margin-top:36px;display:flex;flex-direction:column;gap:10px}
+.progress .lbl{display:flex;justify-content:space-between;font:500 12px var(--f-mono);color:var(--muted);letter-spacing:.06em}
+.bar{height:6px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#6a3bff,#a78bff 70%,var(--accent-2));box-shadow:0 0 14px rgba(139,92,255,.8);transition:width .6s var(--ease)}
+
+/* Cartão da etapa */
+.card{margin-top:22px;border:1px solid rgba(var(--accent-rgb),.5);border-radius:26px;padding:clamp(22px,4vw,36px);
+  background:radial-gradient(120% 90% at 0% 0%,rgba(91,43,255,.38),transparent 55%),linear-gradient(160deg,#1a0e46,#110a2e 60%,#0d0a1f);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 30px 90px -30px rgba(var(--accent-rgb),.6)}
+.step{display:flex;flex-direction:column;gap:28px}
+.step.enter{animation:stepIn .55s var(--ease) both}
+.step.enter-back{animation:stepBack .55s var(--ease) both}
+@keyframes stepIn{from{opacity:0;transform:translateX(28px);filter:blur(4px)}}
+@keyframes stepBack{from{opacity:0;transform:translateX(-28px);filter:blur(4px)}}
+.step-head h2{font-size:clamp(24px,4vw,30px)}
+.step-head p{margin-top:8px;color:var(--muted);font-size:15px}
+
+/* Campos */
+.q{display:flex;flex-direction:column;gap:12px;border:0;padding:0;margin:0;min-width:0}
+.q>legend,.q>label.ql{font-weight:600;font-size:15.5px;padding:0;margin-bottom:2px}
+.q .hint{font-size:13px;color:var(--dim);margin-top:-6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.field label{font-weight:600;font-size:14.5px}
+.field label small{font-weight:400;color:var(--dim)}
+input[type=text],input[type=email],input[type=tel],textarea,select{
+  width:100%;font:500 15px var(--f-body);color:var(--fg);background:rgba(7,6,15,.55);border:1px solid var(--line);
+  border-radius:14px;padding:13px 15px;transition:border-color .2s,box-shadow .2s}
+textarea{min-height:96px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#8b5cff;box-shadow:0 0 0 4px rgba(var(--accent-rgb),.22)}
+input::placeholder,textarea::placeholder{color:#6f66a0}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.opt span{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:14px;border:1px solid var(--line);
+  background:rgba(255,255,255,.04);font-size:14.5px;color:#ded6ff;transition:all .25s var(--ease);cursor:pointer;user-select:none}
+.opt span::before{content:"";width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(200,185,255,.6);flex:none;transition:all .25s}
+.opt input[type=checkbox]+span::before{border-radius:4px}
+.opt:hover span{border-color:var(--line-strong);background:rgba(255,255,255,.07)}
+.opt input:checked+span{border-color:#8b5cff;background:linear-gradient(135deg,rgba(106,59,255,.55),rgba(75,30,240,.45));color:#fff;box-shadow:0 0 22px -4px rgba(var(--accent-rgb),.9)}
+.opt input:checked+span::before{background:#fff;border-color:#fff;box-shadow:inset 0 0 0 3px #5B2BFF}
+.opt input:focus-visible+span{outline:2px solid var(--accent-2);outline-offset:2px}
+.err{display:none;font-size:13px;color:var(--crit)}
+.q.invalid .err,.field.invalid .err{display:block}
+.field.invalid input,.field.invalid select{border-color:var(--crit)}
+.consent{font-size:13px;color:var(--dim)}
+.consent a{color:#c9b8ff}
+
+/* Navegação */
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;font:600 15px var(--f-body);padding:14px 26px;border:0;cursor:pointer;text-decoration:none;transition:box-shadow .3s var(--ease),background .3s,transform .2s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:linear-gradient(135deg,#6a3bff,#4B1EF0);color:#fff;box-shadow:0 0 0 1px rgba(139,92,255,.6),0 10px 40px -10px rgba(var(--accent-rgb),.9)}
+.btn-primary:hover{box-shadow:0 0 0 1px rgba(139,92,255,.9),0 14px 60px -6px rgba(var(--accent-rgb),1)}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.btn-ghost:hover{color:var(--fg);border-color:var(--line-strong)}
+.btn[hidden]{display:none!important}
+.btn-wa{background:#1faa59;color:#fff;box-shadow:0 10px 40px -12px rgba(31,170,89,.9)}
+.btn-wa:hover{background:#22bb62}
+
+/* Resultado */
+.result h2{font-size:clamp(26px,4.4vw,36px)}
+.score-top{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:6px}
+.ring{--v:0;width:118px;height:118px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:conic-gradient(var(--ring-c,#8b5cff) calc(var(--v)*1%),rgba(255,255,255,.08) 0)}
+.ring b{width:94px;height:94px;border-radius:50%;background:#110a2e;display:grid;place-items:center;font:700 30px var(--f-display);font-variant-numeric:tabular-nums}
+.ring b small{display:block;font:500 10px var(--f-mono);color:var(--dim);letter-spacing:.1em;margin-top:-6px}
+.score-top p{color:var(--muted);max-width:420px;min-width:0;flex:1}
+.areas{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.area{display:grid;grid-template-columns:minmax(0,180px) 1fr 86px;gap:14px;align-items:center}
+.area .nm{font-weight:600;font-size:14.5px}
+.area .tr{height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.area .tr i{display:block;height:100%;width:0;border-radius:99px;transition:width 1.1s var(--ease)}
+.pill{justify-self:end;font:600 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border-radius:999px}
+.pill.crit{color:var(--crit);background:rgba(255,107,129,.12)}
+.pill.warn{color:var(--warn);background:rgba(255,181,71,.12)}
+.pill.ok{color:var(--ok);background:rgba(61,220,151,.12)}
+@media(max-width:560px){.area{grid-template-columns:1fr auto}.area .tr{grid-column:1/-1;grid-row:2}}
+.recs{display:flex;flex-direction:column;gap:12px}
+.rec{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:16px 18px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.04)}
+.rec .n{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font:700 14px var(--f-mono);background:linear-gradient(135deg,#6a3bff,#4B1EF0);box-shadow:0 0 18px rgba(var(--accent-rgb),.7)}
+.rec b{display:block;font-size:15.5px}
+.rec p{color:var(--muted);font-size:14px;margin-top:4px}
+.rec .tag{display:inline-block;margin-top:8px;font:500 11px var(--f-mono);color:#b9a3ff}
+.foot-note{font-size:13px;color:var(--dim)}
+.copied{font:500 12px var(--f-mono);color:var(--ok)}
+.sel{font-size:13px;color:var(--dim);white-space:pre-wrap;background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:8px;user-select:all}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="back" href="./" data-back>← Voltar para o site</a>
+    <a class="logo" href="./" data-back aria-label="NEX"><svg viewBox="100 15 1820 640"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
+  </header>
+
+  <section class="intro" id="intro">
+    <span class="eyebrow">Diagnóstico comercial</span>
+    <h1>Descubra onde seu comercial está perdendo vendas.</h1>
+    <p>Responda algumas perguntas sobre como sua empresa capta, atende e acompanha clientes. No final, você vê na hora os pontos fracos do seu processo e o que resolve cada um.</p>
+    <div class="meta"><span>5 etapas</span><span>cerca de 3 minutos</span><span>resultado na hora</span></div>
+  </section>
+
+  <div class="progress" id="progress" aria-live="polite">
+    <div class="lbl"><span id="p-title">Etapa 1 de 5 · Sobre você</span><span id="p-pct">0%</span></div>
+    <div class="bar"><i id="p-bar"></i></div>
+  </div>
+
+  <form class="card" id="form" novalidate>
+    <!-- 1. Sobre você -->
+    <div class="step" data-step="1" data-title="Sobre você">
+      <div class="step-head"><h2>Primeiro, quem é você?</h2><p>Para personalizar o diagnóstico e o nosso retorno.</p></div>
+      <div class="grid2">
+        <div class="field" data-req><label for="nome">Seu nome</label><input type="text" id="nome" name="nome" autocomplete="name" placeholder="Como podemos te chamar"><span class="err">Informe seu nome.</span></div>
+        <div class="field" data-req><label for="empresa">Empresa</label><input type="text" id="empresa" name="empresa" autocomplete="organization" placeholder="Nome da empresa"><span class="err">Informe a empresa.</span></div>
+        <div class="field" data-req><label for="whats">WhatsApp</label><input type="tel" id="whats" name="whats" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000"><span class="err">Informe um WhatsApp com DDD.</span></div>
+        <div class="field"><label for="email">E-mail <small>(opcional)</small></label><input type="email" id="email" name="email" autocomplete="email" placeholder="voce@empresa.com.br"></div>
+      </div>
+      <div class="field" data-req><label for="segmento">Segmento</label>
+        <select id="segmento" name="segmento">
+          <option value="">Selecione</option>
+          <option>Saúde e odontologia</option><option>Estética e beleza</option><option>Imobiliário</option><option>Educação</option>
+          <option>Serviços profissionais (advocacia, contabilidade)</option><option>Construção e engenharia</option><option>Seguros e financeiro</option>
+          <option>Varejo e e-commerce</option><option>Outro</option>
+        </select><span class="err">Selecione o segmento.</span></div>
+      <fieldset class="q" data-req="radio" data-name="time">
+        <legend>Quantas pessoas atendem clientes no comercial?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="time" value="Só eu"><span>Só eu</span></label>
+          <label class="opt"><input type="radio" name="time" value="2 a 5"><span>2 a 5</span></label>
+          <label class="opt"><input type="radio" name="time" value="6 a 15"><span>6 a 15</span></label>
+          <label class="opt"><input type="radio" name="time" value="Mais de 15"><span>Mais de 15</span></label>
+        </div><span class="err">Escolha uma opção.</span>
+      </fieldset>
+    </div>
+
+    <!-- 2. Captação -->
+    <div class="step" data-step="2" data-title="Captação" hidden>
+      <div class="step-head"><h2>Como os clientes chegam até você?</h2><p>Entender a entrada de leads mostra se o problema começa antes do atendimento.</p></div>
+      <fieldset class="q" data-req="check" data-name="origem">
+        <legend>De onde vêm seus leads hoje?</legend><p class="hint">Marque todas que se aplicam.</p>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="origem" value="Tráfego pago"><span>Tráfego pago (Meta/Google)</span></label>
+          <label class="opt"><input type="checkbox" name="origem" value="Instagram orgânico"><span>Instagram orgânico</span></label>
+          <label class="opt"><input type="checkbox" name="origem" value="Indicação"><span>Indicação</span></label>
+          <label class="opt"><input type="checkbox" name="origem" value="Google/Site"><span>Google ou site</span></label>
+          <label class="opt"><input type="checkbox" name="origem" value="Loja física"><span>Loja ou balcão</span></label>
+          <label class="opt"><input type="checkbox" name="origem" value="Outros"><span>Outros</span></label>
+        </div><span class="err">Marque pelo menos uma.</span>
+      </fieldset>
+      <fieldset class="q" data-req="radio" data-name="leads">
+        <legend>Quantos contatos novos você recebe por mês?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="leads" value="Menos de 50"><span>Menos de 50</span></label>
+          <label class="opt"><input type="radio" name="leads" value="50 a 200"><span>50 a 200</span></label>
+          <label class="opt"><input type="radio" name="leads" value="200 a 500"><span>200 a 500</span></label>
+          <label class="opt"><input type="radio" name="leads" value="Mais de 500"><span>Mais de 500</span></label>
+          <label class="opt"><input type="radio" name="leads" value="Não sei"><span>Não sei</span></label>
+        </div><span class="err">Escolha uma opção.</span>
+      </fieldset>
+      <fieldset class="q" data-req="radio" data-name="invest">
+        <legend>Quanto investe por mês em anúncios?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="invest" value="Não invisto"><span>Não invisto</span></label>
+          <label class="opt"><input type="radio" name="invest" value="Até R$ 3 mil"><span>Até R$ 3 mil</span></label>
+          <label class="opt"><input type="radio" name="invest" value="R$ 3 a 10 mil"><span>R$ 3 a 10 mil</span></label>
+          <label class="opt"><input type="radio" name="invest" value="Mais de R$ 10 mil"><span>Mais de R$ 10 mil</span></label>
+        </div><span class="err">Escolha uma opção.</span>
+      </fieldset>
+    </div>
+
+    <!-- 3. Atendimento -->
+    <div class="step" data-step="3" data-title="Atendimento" hidden>
+      <div class="step-head"><h2>Quando o cliente chama, o que acontece?</h2><p>Velocidade de resposta é o fator que mais pesa na conversão.</p></div>
+      <fieldset class="q" data-req="radio" data-name="tempo">
+        <legend>Em quanto tempo um contato novo recebe a primeira resposta?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="tempo" value="Até 5 minutos"><span>Até 5 minutos</span></label>
+          <label class="opt"><input type="radio" name="tempo" value="Até 1 hora"><span>Até 1 hora</span></label>
+          <label class="opt"><input type="radio" name="tempo" value="Algumas horas"><span>Algumas horas</span></label>
+          <label class="opt"><input type="radio" name="tempo" value="Só no dia seguinte"><span>Só no dia seguinte</span></label>
+          <label class="opt"><input type="radio" name="tempo" value="Não sei"><span>Não sei</span></label>
+        </div><span class="err">Escolha uma opção.</span>
+      </fieldset>
+      <fieldset class="q" data-req="radio" data-name="fora">
+        <legend>Quem chama à noite ou no fim de semana é atendido?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="fora" value="Sim, sempre"><span>Sim, sempre</span></label>
+          <label class="opt"><input type="radio" name="fora" value="Às vezes"><span>Às vezes</span></label>
+          <label class="opt"><input type="radio" name="fora" value="Não, só no horário comercial"><span>Não, só no horário comercial</span></label>
+        </div><span class="err">Escolha uma opção.</span>
+      </fieldset>
+      <fieldset class="q" data-req="radio" data-name="quem">
+        <legend>Quem responde as mensagens hoje?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="quem" value="Eu mesmo"><span>Eu mesmo</span></label>
+          <label class="opt"><input type="radio" name="quem" value="Recepção ou secretária"><span>Recepção ou secretária</span></label>
+          <label class="opt"><input type="radio" name="quem" value="Equipe de vendas dedicada"><span>Equipe de vendas dedicada</span></label>
+          <label class="opt"><input type="radio" name="quem" value="Não tem alguém definido"><span>Não tem alguém definido</span></label>
+        </div><span class="err">Escolha uma opção.</span>
+      </fieldset>
+      <fieldset class="q" data-req="radio" data-name="numeros">
+        <legend>Como os números de WhatsApp estão organizados?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="numeros" value="Um número da empresa"><span>Um número da empresa</span></label>
+          <label class="opt"><input type="radio" name="numeros" value="Vários números da empresa"><span>Vários números da empresa</span></label>
+          <label class="opt"><input type="radio" name="numeros" value="Celulares pessoais da equipe"><span>Celulares pessoais da equipe</span></label>
+        </div><span class="err">Escolha uma opção.</span>
+      </fieldset>
+    </div>
+
+    <!-- 4. Gestão -->
+    <div class="step" data-step="4" data-title="Gestão" hidden>
+      <div class="step-head"><h2>E depois do primeiro contato?</h2><p>A maior parte das vendas perdidas some aqui, no acompanhamento.</p></div>
+      <fieldset class="q" data-req="radio" data-name="registro">
+        <legend>Onde vocês registram os clientes e as negociações?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="registro" value="Em um CRM"><span>Em um CRM</span></label>
+          <label class="opt"><input type="radio" name="registro" value="Em planilha"><span>Em planilha</span></label>
+          <label class="opt"><input type="radio" name="registro" value="Só no WhatsApp"><span>Só no WhatsApp</span></label>
+          <label class="opt"><input type="radio" name="registro" value="Na memória ou no caderno"><span>Na memória ou no caderno</span></label>
+        </div><span class="err">Escolha uma opção.</span>
+      </fieldset>
+      <fieldset class="q" data-req="radio" data-name="follow">
+        <legend>Quando o cliente não responde, o que vocês fazem?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="follow" value="Temos um roteiro de follow-up"><span>Temos um roteiro de follow-up</span></label>
+          <label class="opt"><input type="radio" name="follow" value="Chamamos de novo quando lembramos"><span>Chamamos de novo quando lembramos</span></label>
+          <label class="opt"><input type="radio" name="follow" value="Esperamos o cliente voltar"><span>Esperamos o cliente voltar</span></label>
+        </div><span class="err">Escolha uma opção.</span>
+      </fieldset>
+      <fieldset class="q" data-req="radio" data-name="perde">
+        <legend>Com que frequência um cliente interessado fica sem retorno?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="perde" value="Raramente"><span>Raramente</span></label>
+          <label class="opt"><input type="radio" name="perde" value="Às vezes"><span>Às vezes</span></label>
+          <label class="opt"><input type="radio" name="perde" value="Com frequência"><span>Com frequência</span></label>
+        </div><span class="err">Escolha uma opção.</span>
+      </fieldset>
+      <fieldset class="q" data-req="radio" data-name="conv">
+        <legend>Você sabe quantos contatos viram venda?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="conv" value="Sei o número exato"><span>Sei o número exato</span></label>
+          <label class="opt"><input type="radio" name="conv" value="Tenho uma ideia aproximada"><span>Tenho uma ideia aproximada</span></label>
+          <label class="opt"><input type="radio" name="conv" value="Não sei"><span>Não sei</span></label>
+        </div><span class="err">Escolha uma opção.</span>
+      </fieldset>
+    </div>
+
+    <!-- 5. Objetivo -->
+    <div class="step" data-step="5" data-title="Objetivo" hidden>
+      <div class="step-head"><h2>Para fechar: o que você quer resolver?</h2><p>Assim sabemos por onde começar a conversa.</p></div>
+      <fieldset class="q" data-req="check" data-name="desafio">
+        <legend>Quais são os maiores desafios hoje?</legend><p class="hint">Marque até três.</p>
+        <div class="opts" data-max="3">
+          <label class="opt"><input type="checkbox" name="desafio" value="Gerar mais contatos"><span>Gerar mais contatos</span></label>
+          <label class="opt"><input type="checkbox" name="desafio" value="Responder mais rápido"><span>Responder mais rápido</span></label>
+          <label class="opt"><input type="checkbox" name="desafio" value="Converter mais contatos em vendas"><span>Converter mais em vendas</span></label>
+          <label class="opt"><input type="checkbox" name="desafio" value="Organizar a equipe"><span>Organizar a equipe</span></label>
+          <label class="opt"><input type="checkbox" name="desafio" value="Ter números e relatórios"><span>Ter números e relatórios</span></label>
+          <label class="opt"><input type="checkbox" name="desafio" value="Atender fora do horário"><span>Atender fora do horário</span></label>
+        </div><span class="err">Marque pelo menos um.</span>
+      </fieldset>
+      <fieldset class="q" data-req="radio" data-name="prazo">
+        <legend>Quando você quer resolver isso?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="prazo" value="Agora, é urgente"><span>Agora, é urgente</span></label>
+          <label class="opt"><input type="radio" name="prazo" value="Nos próximos 30 dias"><span>Nos próximos 30 dias</span></label>
+          <label class="opt"><input type="radio" name="prazo" value="Em até 3 meses"><span>Em até 3 meses</span></label>
+          <label class="opt"><input type="radio" name="prazo" value="Só pesquisando por enquanto"><span>Só pesquisando</span></label>
+        </div><span class="err">Escolha uma opção.</span>
+      </fieldset>
+      <div class="field"><label for="obs">Quer contar mais alguma coisa? <small>(opcional)</small></label><textarea id="obs" name="obs" placeholder="Ex.: perdemos muitos pacientes que chamam depois das 18h"></textarea></div>
+      <p class="consent">Ao ver o resultado, você concorda que a NEX use estas respostas para entrar em contato, conforme a <a href="https://nexinteligence.com.br/privacidade" target="_blank" rel="noopener">Política de privacidade</a>.</p>
+    </div>
+
+    <!-- Resultado -->
+    <div class="step result" data-step="6" hidden>
+      <div class="step-head"><span class="eyebrow">Seu diagnóstico</span><h2 id="r-title" style="margin-top:10px">Resultado</h2></div>
+      <div class="score-top">
+        <div class="ring" id="r-ring"><b><span id="r-score">0</span><small>DE 100</small></b></div>
+        <p id="r-sum"></p>
+      </div>
+      <div><h3 style="font-size:18px;margin-bottom:14px">Saúde do seu comercial por área</h3><div class="areas" id="r-areas"></div></div>
+      <div><h3 style="font-size:18px;margin-bottom:14px">O que resolve, por ordem de prioridade</h3><div class="recs" id="r-recs"></div></div>
+      <div class="nav">
+        <a class="btn btn-wa" id="r-wa" href="#" target="_blank" rel="noopener">Enviar diagnóstico no WhatsApp →</a>
+        <button type="button" class="btn btn-ghost" id="r-copy">Copiar resumo</button>
+      </div>
+      <span class="copied" id="r-copied" hidden>Resumo copiado.</span>
+      <div class="sel" id="r-sel" hidden></div>
+      <p class="foot-note">Um especialista da NEX vai analisar suas respostas e mostrar, numa reunião de apresentação, como resolver cada ponto. Atendimento das 8h às 18h.</p>
+      <button type="button" class="btn btn-ghost" id="r-redo" style="align-self:flex-start">Refazer diagnóstico</button>
+    </div>
+
+    <div class="nav" id="nav">
+      <button type="button" class="btn btn-ghost" id="prev" hidden>← Voltar</button>
+      <button type="submit" class="btn btn-primary" id="next" style="margin-left:auto">Continuar →</button>
+    </div>
+  </form>
+</div>
+
+<script>
+(() => {
+  const WA = '5587991302323';
+  const form = document.getElementById('form');
+  const steps = [...form.querySelectorAll('.step')];
+  const TOTAL = 5;
+  let cur = 1;
+  const $ = id => document.getElementById(id);
+  const STORE = 'nex-diagnostico';
+
+  /* ---------- rascunho no navegador (conveniência; funciona sem) ---------- */
+  const save = () => { try { localStorage.setItem(STORE, JSON.stringify({ cur, data: collect() })); } catch (e) {} };
+  const restore = () => {
+    try {
+      const s = JSON.parse(localStorage.getItem(STORE) || 'null'); if (!s) return;
+      Object.entries(s.data || {}).forEach(([k, v]) => {
+        form.querySelectorAll(`[name="${k}"]`).forEach(el => {
+          if (el.type === 'radio' || el.type === 'checkbox') el.checked = [].concat(v).includes(el.value);
+          else el.value = v;
+        });
+      });
+      if (s.cur >= 1 && s.cur <= TOTAL) cur = s.cur;
+    } catch (e) {}
+  };
+  function collect() {
+    const d = {};
+    new FormData(form).forEach((v, k) => { if (d[k] !== undefined) d[k] = [].concat(d[k], v); else d[k] = v; });
+    ['origem', 'desafio'].forEach(k => { if (d[k] && !Array.isArray(d[k])) d[k] = [d[k]]; });
+    return d;
+  }
+
+  /* ---------- etapas ---------- */
+  function show(n, back) {
+    steps.forEach(s => { s.hidden = +s.dataset.step !== n; s.classList.remove('enter', 'enter-back'); });
+    const s = steps.find(s => +s.dataset.step === n);
+    void s.offsetWidth; s.classList.add(back ? 'enter-back' : 'enter');
+    const done = n > TOTAL;
+    $('prev').hidden = n === 1 || done;
+    $('nav').hidden = done;
+    $('next').textContent = n === TOTAL ? 'Ver meu diagnóstico →' : 'Continuar →';
+    $('p-title').textContent = done ? 'Diagnóstico concluído' : `Etapa ${n} de ${TOTAL} · ${s.dataset.title}`;
+    const pct = done ? 100 : Math.round((n - 1) / TOTAL * 100);
+    $('p-pct').textContent = pct + '%'; $('p-bar').style.width = pct + '%';
+    $('intro').hidden = done;
+  }
+  function validate(n) {
+    const s = steps.find(s => +s.dataset.step === n); let ok = true, first = null;
+    s.querySelectorAll('[data-req]').forEach(el => {
+      let valid;
+      if (el.matches('fieldset')) valid = !!el.querySelector('input:checked');
+      else { const i = el.querySelector('input,select'); const v = i.value.trim();
+        valid = i.id === 'whats' ? v.replace(/\D/g, '').length >= 10 : !!v; }
+      el.classList.toggle('invalid', !valid);
+      if (!valid) { ok = false; first ||= el; }
+    });
+    if (first) { first.scrollIntoView({ behavior: 'smooth', block: 'center' }); (first.querySelector('input,select') || first).focus({ preventScroll: true }); }
+    return ok;
+  }
+  form.addEventListener('change', e => { const w = e.target.closest('[data-req]'); if (w) w.classList.remove('invalid'); save(); });
+  form.addEventListener('input', e => { const w = e.target.closest('[data-req]'); if (w) w.classList.remove('invalid'); save(); });
+
+  // limite de 3 desafios
+  form.querySelector('[data-max]').addEventListener('change', e => {
+    const box = e.currentTarget, max = +box.dataset.max;
+    if (box.querySelectorAll('input:checked').length > max) e.target.checked = false;
+  });
+  // máscara simples de telefone
+  $('whats').addEventListener('input', e => {
+    const d = e.target.value.replace(/\D/g, '').slice(0, 11);
+    e.target.value = d.length > 10 ? `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`
+      : d.length > 6 ? `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`
+      : d.length > 2 ? `(${d.slice(0, 2)}) ${d.slice(2)}` : d;
+  });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!validate(cur)) return;
+    cur++; if (cur > TOTAL) renderResult();
+    show(cur); save();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  $('prev').addEventListener('click', () => { if (cur > 1) { cur--; show(cur, true); save(); } });
+  $('r-redo').addEventListener('click', () => { form.reset(); try { localStorage.removeItem(STORE); } catch (e) {} cur = 1; show(1, true); });
+
+  /* ---------- pontuação ---------- */
+  const pick = (v, map, def = 0) => map[v] ?? def;
+  function scoreAll(d) {
+    const velocidade = Math.round(.65 * pick(d.tempo, { 'Até 5 minutos': 100, 'Até 1 hora': 70, 'Algumas horas': 35, 'Só no dia seguinte': 10, 'Não sei': 20 })
+      + .35 * pick(d.fora, { 'Sim, sempre': 100, 'Às vezes': 50, 'Não, só no horário comercial': 0 }));
+    const organizacao = Math.round(.55 * pick(d.registro, { 'Em um CRM': 100, 'Em planilha': 50, 'Só no WhatsApp': 20, 'Na memória ou no caderno': 0 })
+      + .25 * pick(d.quem, { 'Equipe de vendas dedicada': 100, 'Recepção ou secretária': 55, 'Eu mesmo': 40, 'Não tem alguém definido': 5 })
+      + .20 * pick(d.numeros, { 'Um número da empresa': 90, 'Vários números da empresa': 60, 'Celulares pessoais da equipe': 10 }));
+    const followup = Math.round(.55 * pick(d.follow, { 'Temos um roteiro de follow-up': 100, 'Chamamos de novo quando lembramos': 40, 'Esperamos o cliente voltar': 0 })
+      + .45 * pick(d.perde, { 'Raramente': 100, 'Às vezes': 50, 'Com frequência': 0 }));
+    const dados = Math.round(.75 * pick(d.conv, { 'Sei o número exato': 100, 'Tenho uma ideia aproximada': 45, 'Não sei': 0 })
+      + .25 * pick(d.registro, { 'Em um CRM': 100, 'Em planilha': 55, 'Só no WhatsApp': 10, 'Na memória ou no caderno': 0 }));
+    const captacao = Math.round(.5 * pick(d.leads, { 'Menos de 50': 20, '50 a 200': 55, '200 a 500': 80, 'Mais de 500': 95, 'Não sei': 25 })
+      + .35 * pick(d.invest, { 'Não invisto': 15, 'Até R$ 3 mil': 50, 'R$ 3 a 10 mil': 75, 'Mais de R$ 10 mil': 90 })
+      + .15 * Math.min(100, (d.origem || []).length * 34));
+    return { velocidade, organizacao, followup, dados, captacao };
+  }
+  const AREAS = {
+    velocidade: { nome: 'Velocidade de atendimento', desafio: ['Responder mais rápido', 'Atender fora do horário'],
+      svc: 'Agente de IA NEX', why: 'Responde, qualifica e agenda em segundos, 24 horas por dia, inclusive à noite e no fim de semana.', who: 'NEX' },
+    organizacao: { nome: 'Organização do comercial', desafio: ['Organizar a equipe'],
+      svc: 'CRM e funil de vendas NEX', why: 'Todas as conversas, clientes e negociações num só lugar, com cada pessoa da equipe vendo o que precisa.', who: 'NEX' },
+    followup: { nome: 'Follow-up e conversão', desafio: ['Converter mais contatos em vendas'],
+      svc: 'Automação de follow-up NEX', why: 'Lembra e retoma quem parou de responder, para nenhum interessado ficar sem retorno.', who: 'NEX' },
+    dados: { nome: 'Números e controle', desafio: ['Ter números e relatórios'],
+      svc: 'Relatórios e painel NEX', why: 'Mostra quantos contatos chegam, em que etapa travam e quantos viram venda.', who: 'NEX' },
+    captacao: { nome: 'Captação de clientes', desafio: ['Gerar mais contatos'],
+      svc: 'Tráfego pago e geração de demanda', why: 'Campanhas no Meta e no Google para trazer mais contatos qualificados para dentro do funil.', who: 'Conexão Marketing e Tecnologia' },
+  };
+  const level = s => s < 40 ? ['crit', 'Crítico', '#ff6b81'] : s < 65 ? ['warn', 'Atenção', '#ffb547'] : ['ok', 'Saudável', '#3ddc97'];
+
+  let summary = '';
+  function renderResult() {
+    const d = collect(), sc = scoreAll(d);
+    const keys = Object.keys(sc);
+    const total = Math.round(keys.reduce((a, k) => a + sc[k], 0) / keys.length);
+    const first = (d.nome || '').trim().split(/\s+/)[0] || 'Seu';
+    // prioridade = déficit + bônus se a pessoa marcou o desafio dessa área
+    const ranked = keys.map(k => ({ k, s: sc[k], p: (100 - sc[k]) + ((d.desafio || []).some(x => AREAS[k].desafio.includes(x)) ? 15 : 0) }))
+      .sort((a, b) => b.p - a.p);
+    const crit = ranked.filter(r => r.s < 40).length;
+
+    $('r-title').textContent = `${first}, este é o raio-x do seu comercial`;
+    $('r-score').textContent = total;
+    const [, lbl, col] = level(total);
+    const ring = $('r-ring'); ring.style.setProperty('--ring-c', col);
+    requestAnimationFrame(() => animateRing(ring, total));
+    $('r-sum').textContent = crit
+      ? `Encontramos ${crit} ${crit > 1 ? 'áreas críticas' : 'área crítica'} no seu processo. Nível geral: ${lbl.toLowerCase()}. As recomendações abaixo começam pelo que mais faz você perder vendas hoje.`
+      : `Seu comercial está em nível ${lbl.toLowerCase()}. Ainda há espaço para ganhar velocidade e controle, e as recomendações abaixo mostram por onde começar.`;
+
+    $('r-areas').innerHTML = ranked.map(r => {
+      const [c, l, color] = level(r.s);
+      return `<div class="area"><span class="nm">${AREAS[r.k].nome}</span><span class="tr"><i data-w="${r.s}" style="background:${color};box-shadow:0 0 12px ${color}88"></i></span><span class="pill ${c}">${l}</span></div>`;
+    }).join('');
+    setTimeout(() => $('r-areas').querySelectorAll('i').forEach(i => i.style.width = Math.max(4, i.dataset.w) + '%'), 120);
+
+    const recs = ranked.filter(r => r.s < 65 || r.p >= 50).slice(0, 4);
+    $('r-recs').innerHTML = (recs.length ? recs : ranked.slice(0, 2)).map((r, i) =>
+      `<div class="rec"><span class="n">${i + 1}</span><div><b>${AREAS[r.k].svc}</b><p>${AREAS[r.k].why}</p><span class="tag">Resolve: ${AREAS[r.k].nome.toLowerCase()} · ${AREAS[r.k].who}</span></div></div>`).join('');
+
+    summary = [
+      'Olá! Fiz o diagnóstico comercial no site da NEX.',
+      '',
+      `Nome: ${d.nome}`, `Empresa: ${d.empresa}`, `Segmento: ${d.segmento}`, `WhatsApp: ${d.whats}`, d.email ? `E-mail: ${d.email}` : null,
+      `Equipe comercial: ${d.time}`,
+      `Leads por mês: ${d.leads} · Anúncios: ${d.invest}`,
+      `Origem dos leads: ${(d.origem || []).join(', ')}`,
+      `Primeira resposta: ${d.tempo} · Fora do horário: ${d.fora}`,
+      `Registro: ${d.registro} · Follow-up: ${d.follow}`,
+      '',
+      `Nota geral: ${total}/100`,
+      ...ranked.map(r => `- ${AREAS[r.k].nome}: ${r.s}/100 (${level(r.s)[1]})`),
+      '',
+      `Desafios: ${(d.desafio || []).join(', ')}`, `Prazo: ${d.prazo}`,
+      d.obs ? `Observação: ${d.obs}` : null,
+      '',
+      'Quero agendar a reunião de apresentação.'
+    ].filter(x => x !== null).join('\n');
+    $('r-wa').href = `https://wa.me/${WA}?text=${encodeURIComponent(summary)}`;
+    $('r-sel').textContent = summary;
+  }
+  function animateRing(el, to) {
+    const t0 = performance.now();
+    const tick = t => { const k = Math.min((t - t0) / 1200, 1), e = 1 - Math.pow(1 - k, 3);
+      el.style.setProperty('--v', (to * e).toFixed(1)); $('r-score').textContent = Math.round(to * e);
+      if (k < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  }
+  $('r-copy').addEventListener('click', () => {
+    const ok = () => { $('r-copied').hidden = false; setTimeout(() => $('r-copied').hidden = true, 2500); };
+    const fallback = () => { const s = $('r-sel'); s.hidden = false; const r = document.createRange(); r.selectNodeContents(s); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); };
+    try { navigator.clipboard.writeText(summary).then(ok, fallback); } catch (e) { fallback(); }
+  });
+
+  document.querySelectorAll('[data-back]').forEach(a => a.addEventListener('click', e => { if (history.length > 1) { e.preventDefault(); history.back(); } }));
+  restore(); show(cur);
+})();
+</script>
+</body>
+</html>
