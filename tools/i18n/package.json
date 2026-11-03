@@ -1,0 +1,14 @@
+{
+  "name": "nex-i18n-check",
+  "private": true,
+  "description": "Confere as traduções do site (nex-site/site/i18n).",
+  "type": "module",
+  "scripts": {
+    "test": "node check.mjs",
+    "listar": "node check.mjs --listar"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1",
+    "typescript": "^6.0.3"
+  }
+}

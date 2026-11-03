@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="i18n/i18n.js"></script>
 <title>Diagnóstico NEX</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -41,6 +42,7 @@ p{margin:0}
 .top a.back{font-size:14px;color:var(--muted);text-decoration:none;display:inline-flex;gap:8px;align-items:center}
 .top a.back:hover{color:var(--fg)}
 .logo svg{height:24px;width:auto;fill:#5B2BFF;filter:drop-shadow(0 0 10px rgba(91,43,255,.6));display:block}
+.top .lang{margin-left:auto}
 
 /* Intro */
 .eyebrow{font:500 12px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#b9a3ff}
@@ -144,7 +146,8 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
 <div class="wrap">
   <header class="top">
     <a class="back" href="./" data-back>← Voltar para o site</a>
-    <a class="logo" href="./" data-back aria-label="NEX"><svg viewBox="100 15 1820 640"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
+    <div class="lang" data-lang-picker translate="no"></div>
+    <a class="logo" href="./" data-back aria-label="NEX" translate="no"><svg viewBox="100 15 1820 640"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
   </header>
 
   <section class="intro" id="intro">
@@ -172,9 +175,9 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
       <div class="field" data-req><label for="segmento">Segmento</label>
         <select id="segmento" name="segmento">
           <option value="">Selecione</option>
-          <option>Saúde e odontologia</option><option>Estética e beleza</option><option>Imobiliário</option><option>Educação</option>
-          <option>Serviços profissionais (advocacia, contabilidade)</option><option>Construção e engenharia</option><option>Seguros e financeiro</option>
-          <option>Varejo e e-commerce</option><option>Outro</option>
+          <option value="Saúde e odontologia">Saúde e odontologia</option><option value="Estética e beleza">Estética e beleza</option><option value="Imobiliário">Imobiliário</option><option value="Educação">Educação</option>
+          <option value="Serviços profissionais (advocacia, contabilidade)">Serviços profissionais (advocacia, contabilidade)</option><option value="Construção e engenharia">Construção e engenharia</option><option value="Seguros e financeiro">Seguros e financeiro</option>
+          <option value="Varejo e e-commerce">Varejo e e-commerce</option><option value="Outro">Outro</option>
         </select><span class="err">Selecione o segmento.</span></div>
       <fieldset class="q" data-req="radio" data-name="time">
         <legend>Quantas pessoas atendem clientes no comercial?</legend>
@@ -324,7 +327,7 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
         </div><span class="err">Escolha uma opção.</span>
       </fieldset>
       <div class="field"><label for="obs">Quer contar mais alguma coisa? <small>(opcional)</small></label><textarea id="obs" name="obs" placeholder="Ex.: perdemos muitos pacientes que chamam depois das 18h"></textarea></div>
-      <p class="consent">Ao ver o resultado, você concorda que a NEX use estas respostas para entrar em contato, conforme a <a href="https://nexinteligence.com.br/privacidade" target="_blank" rel="noopener">Política de privacidade</a>.</p>
+      <p class="consent" data-i18n>Ao ver o resultado, você concorda que a NEX use estas respostas para entrar em contato, conforme a <a href="https://nexinteligence.com.br/privacidade" target="_blank" rel="noopener">Política de privacidade</a>.</p>
     </div>
 
     <!-- Resultado -->
@@ -353,8 +356,10 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
   </form>
 </div>
 
+<script>NEX_I18N.apply();</script>
 <script>
 (() => {
+  const { t, tx } = NEX_I18N;
   const WA = '5587991302323';
   const form = document.getElementById('form');
   const steps = [...form.querySelectorAll('.step')];
@@ -392,8 +397,8 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
     const done = n > TOTAL;
     $('prev').hidden = n === 1 || done;
     $('nav').hidden = done;
-    $('next').textContent = n === TOTAL ? 'Ver meu diagnóstico →' : 'Continuar →';
-    $('p-title').textContent = done ? 'Diagnóstico concluído' : `Etapa ${n} de ${TOTAL} · ${s.dataset.title}`;
+    $('next').textContent = n === TOTAL ? t('Ver meu diagnóstico →') : t('Continuar →');
+    $('p-title').textContent = done ? t('Diagnóstico concluído') : t('Etapa {{n}} de {{total}} · {{etapa}}', { n, total: TOTAL, etapa: s.dataset.title });
     const pct = done ? 100 : Math.round((n - 1) / TOTAL * 100);
     $('p-pct').textContent = pct + '%'; $('p-bar').style.width = pct + '%';
     $('intro').hidden = done;
@@ -454,19 +459,22 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
       + .15 * Math.min(100, (d.origem || []).length * 34));
     return { velocidade, organizacao, followup, dados, captacao };
   }
+  // nome, svc, why e o rótulo de level são traduzidos ao mostrar; desafio são os valores das respostas (ficam em pt-BR)
   const AREAS = {
-    velocidade: { nome: 'Velocidade de atendimento', desafio: ['Responder mais rápido', 'Atender fora do horário'],
-      svc: 'Agente de IA NEX', why: 'Responde, qualifica e agenda em segundos, 24 horas por dia, inclusive à noite e no fim de semana.', who: 'NEX' },
-    organizacao: { nome: 'Organização do comercial', desafio: ['Organizar a equipe'],
-      svc: 'CRM e funil de vendas NEX', why: 'Todas as conversas, clientes e negociações num só lugar, com cada pessoa da equipe vendo o que precisa.', who: 'NEX' },
-    followup: { nome: 'Follow-up e conversão', desafio: ['Converter mais contatos em vendas'],
-      svc: 'Automação de follow-up NEX', why: 'Lembra e retoma quem parou de responder, para nenhum interessado ficar sem retorno.', who: 'NEX' },
-    dados: { nome: 'Números e controle', desafio: ['Ter números e relatórios'],
-      svc: 'Relatórios e painel NEX', why: 'Mostra quantos contatos chegam, em que etapa travam e quantos viram venda.', who: 'NEX' },
-    captacao: { nome: 'Captação de clientes', desafio: ['Gerar mais contatos'],
-      svc: 'Tráfego pago e geração de demanda', why: 'Campanhas no Meta e no Google para trazer mais contatos qualificados para dentro do funil.', who: 'Conexão Marketing e Tecnologia' },
+    velocidade: { nome: tx('Velocidade de atendimento'), desafio: ['Responder mais rápido', 'Atender fora do horário'],
+      svc: tx('Agente de IA NEX'), why: tx('Responde, qualifica e agenda em segundos, 24 horas por dia, inclusive à noite e no fim de semana.'), who: 'NEX' },
+    organizacao: { nome: tx('Organização do comercial'), desafio: ['Organizar a equipe'],
+      svc: tx('CRM e funil de vendas NEX'), why: tx('Todas as conversas, clientes e negociações num só lugar, com cada pessoa da equipe vendo o que precisa.'), who: 'NEX' },
+    followup: { nome: tx('Follow-up e conversão'), desafio: ['Converter mais contatos em vendas'],
+      svc: tx('Automação de follow-up NEX'), why: tx('Lembra e retoma quem parou de responder, para nenhum interessado ficar sem retorno.'), who: 'NEX' },
+    dados: { nome: tx('Números e controle'), desafio: ['Ter números e relatórios'],
+      svc: tx('Relatórios e painel NEX'), why: tx('Mostra quantos contatos chegam, em que etapa travam e quantos viram venda.'), who: 'NEX' },
+    captacao: { nome: tx('Captação de clientes'), desafio: ['Gerar mais contatos'],
+      svc: tx('Tráfego pago e geração de demanda'), why: tx('Campanhas no Meta e no Google para trazer mais contatos qualificados para dentro do funil.'), who: 'Conexão Marketing e Tecnologia' },
   };
-  const level = s => s < 40 ? ['crit', 'Crítico', '#ff6b81'] : s < 65 ? ['warn', 'Atenção', '#ffb547'] : ['ok', 'Saudável', '#3ddc97'];
+  const level = s => s < 40 ? ['crit', tx('Crítico'), '#ff6b81'] : s < 65 ? ['warn', tx('Atenção'), '#ffb547'] : ['ok', tx('Saudável'), '#3ddc97'];
+  // respostas são guardadas pelo valor em pt-BR; no texto aparecem no idioma da página, com t(valor)
+  const list = v => (v || []).map(x => t(x)).join(', ');
 
   let summary = '';
   function renderResult() {
@@ -479,42 +487,45 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
       .sort((a, b) => b.p - a.p);
     const crit = ranked.filter(r => r.s < 40).length;
 
-    $('r-title').textContent = `${first}, este é o raio-x do seu comercial`;
+    $('r-title').textContent = t('{{nome}}, este é o raio-x do seu comercial', { nome: first });
     $('r-score').textContent = total;
     const [, lbl, col] = level(total);
     const ring = $('r-ring'); ring.style.setProperty('--ring-c', col);
     requestAnimationFrame(() => animateRing(ring, total));
-    $('r-sum').textContent = crit
-      ? `Encontramos ${crit} ${crit > 1 ? 'áreas críticas' : 'área crítica'} no seu processo. Nível geral: ${lbl.toLowerCase()}. As recomendações abaixo começam pelo que mais faz você perder vendas hoje.`
-      : `Seu comercial está em nível ${lbl.toLowerCase()}. Ainda há espaço para ganhar velocidade e controle, e as recomendações abaixo mostram por onde começar.`;
+    const nivel = t(lbl).toLowerCase();
+    $('r-sum').textContent = crit > 1
+      ? t('Encontramos {{n}} áreas críticas no seu processo. Nível geral: {{nivel}}. As recomendações abaixo começam pelo que mais faz você perder vendas hoje.', { n: crit, nivel })
+      : crit
+      ? t('Encontramos {{n}} área crítica no seu processo. Nível geral: {{nivel}}. As recomendações abaixo começam pelo que mais faz você perder vendas hoje.', { n: crit, nivel })
+      : t('Seu comercial está em nível {{nivel}}. Ainda há espaço para ganhar velocidade e controle, e as recomendações abaixo mostram por onde começar.', { nivel });
 
     $('r-areas').innerHTML = ranked.map(r => {
       const [c, l, color] = level(r.s);
-      return `<div class="area"><span class="nm">${AREAS[r.k].nome}</span><span class="tr"><i data-w="${r.s}" style="background:${color};box-shadow:0 0 12px ${color}88"></i></span><span class="pill ${c}">${l}</span></div>`;
+      return `<div class="area"><span class="nm">${t(AREAS[r.k].nome)}</span><span class="tr"><i data-w="${r.s}" style="background:${color};box-shadow:0 0 12px ${color}88"></i></span><span class="pill ${c}">${t(l)}</span></div>`;
     }).join('');
     setTimeout(() => $('r-areas').querySelectorAll('i').forEach(i => i.style.width = Math.max(4, i.dataset.w) + '%'), 120);
 
     const recs = ranked.filter(r => r.s < 65 || r.p >= 50).slice(0, 4);
     $('r-recs').innerHTML = (recs.length ? recs : ranked.slice(0, 2)).map((r, i) =>
-      `<div class="rec"><span class="n">${i + 1}</span><div><b>${AREAS[r.k].svc}</b><p>${AREAS[r.k].why}</p><span class="tag">Resolve: ${AREAS[r.k].nome.toLowerCase()} · ${AREAS[r.k].who}</span></div></div>`).join('');
+      `<div class="rec"><span class="n">${i + 1}</span><div><b>${t(AREAS[r.k].svc)}</b><p>${t(AREAS[r.k].why)}</p><span class="tag">${t('Resolve: {{area}} · {{quem}}', { area: t(AREAS[r.k].nome).toLowerCase(), quem: AREAS[r.k].who })}</span></div></div>`).join('');
 
     summary = [
-      'Olá! Fiz o diagnóstico comercial no site da NEX.',
+      t('Olá! Fiz o diagnóstico comercial no site da NEX.'),
       '',
-      `Nome: ${d.nome}`, `Empresa: ${d.empresa}`, `Segmento: ${d.segmento}`, `WhatsApp: ${d.whats}`, d.email ? `E-mail: ${d.email}` : null,
-      `Equipe comercial: ${d.time}`,
-      `Leads por mês: ${d.leads} · Anúncios: ${d.invest}`,
-      `Origem dos leads: ${(d.origem || []).join(', ')}`,
-      `Primeira resposta: ${d.tempo} · Fora do horário: ${d.fora}`,
-      `Registro: ${d.registro} · Follow-up: ${d.follow}`,
+      t('Nome: {{v}}', { v: d.nome }), t('Empresa: {{v}}', { v: d.empresa }), t('Segmento: {{v}}', { v: t(d.segmento) }), t('WhatsApp: {{v}}', { v: d.whats }), d.email ? t('E-mail: {{v}}', { v: d.email }) : null,
+      t('Equipe comercial: {{v}}', { v: t(d.time) }),
+      t('Leads por mês: {{leads}} · Anúncios: {{anuncios}}', { leads: t(d.leads), anuncios: t(d.invest) }),
+      t('Origem dos leads: {{v}}', { v: list(d.origem) }),
+      t('Primeira resposta: {{tempo}} · Fora do horário: {{fora}}', { tempo: t(d.tempo), fora: t(d.fora) }),
+      t('Registro: {{registro}} · Follow-up: {{follow}}', { registro: t(d.registro), follow: t(d.follow) }),
       '',
-      `Nota geral: ${total}/100`,
-      ...ranked.map(r => `- ${AREAS[r.k].nome}: ${r.s}/100 (${level(r.s)[1]})`),
+      t('Nota geral: {{nota}}/100', { nota: total }),
+      ...ranked.map(r => `- ${t(AREAS[r.k].nome)}: ${r.s}/100 (${t(level(r.s)[1])})`),
       '',
-      `Desafios: ${(d.desafio || []).join(', ')}`, `Prazo: ${d.prazo}`,
-      d.obs ? `Observação: ${d.obs}` : null,
+      t('Desafios: {{v}}', { v: list(d.desafio) }), t('Prazo: {{v}}', { v: t(d.prazo) }),
+      d.obs ? t('Observação: {{v}}', { v: d.obs }) : null,
       '',
-      'Quero agendar a reunião de apresentação.'
+      t('Quero agendar a reunião de apresentação.')
     ].filter(x => x !== null).join('\n');
     $('r-wa').href = `https://wa.me/${WA}?text=${encodeURIComponent(summary)}`;
     $('r-sel').textContent = summary;
