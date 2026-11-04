@@ -2,7 +2,7 @@
    Junta toda chave usada: textos do HTML (com as mesmas regras de i18n.js, rodando no jsdom) e chamadas
    t("…"), tx("…") e NEX_I18N.t("…") nos scripts, lidas pela árvore do TypeScript (comentários não contam).
    Falha quando: falta tradução, tradução vazia, {{variáveis}} ou <0>marcações</0> diferentes do original,
-   número diferente (valores ficam no formato pt-BR), marca que sumiu, chave repetida, tradução que o código
+   número diferente (valores ficam no formato pt-BR; máscaras sem letras podem mudar), marca que sumiu, chave repetida, tradução que o código
    não usa mais, chave montada em tempo de execução ou erro de sintaxe.
    Uso (na raiz do repositório):  node tools/i18n/check.mjs            confere
                                   node tools/i18n/check.mjs --listar   lista as chaves e onde aparecem */
@@ -53,6 +53,8 @@ let langs = null, original = null;
 for (const page of readdirSync(SITE).filter(f => f.endsWith('.html'))) {
   const dom = new JSDOM(readFileSync(path.join(SITE, page), 'utf8'),
     { url: `http://localhost/${page}`, runScripts: 'outside-only', includeNodeLocations: true });
+  // o i18n.js detecta o idioma do navegador; aqui a página fica no original para só ler as chaves
+  Object.defineProperty(dom.window.navigator, 'languages', { value: ['pt-BR'] });
   dom.window.eval(i18nSrc);
   const api = dom.window.NEX_I18N;
   langs ??= api.langs.map(l => l.code); original ??= api.original;
@@ -116,7 +118,8 @@ for (const l of targets) {
     if (!v.trim()) { errors.push(`${name}: tradução vazia de "${key}"`); continue; }
     if (vars(v) !== vars(key)) errors.push(`${name}: variáveis {{…}} diferentes em "${key}" → "${v}"`);
     if (tags(v) !== tags(key)) errors.push(`${name}: marcações <n>…</n> diferentes em "${key}" → "${v}"`);
-    if (nums(v) !== nums(key)) errors.push(`${name}: números diferentes (valores ficam em pt-BR) em "${key}" → "${v}"`);
+    // máscara de formato sem palavras (ex.: telefone "(00) 00000-0000") pode mudar por país
+    if (/\p{L}/u.test(key) && nums(v) !== nums(key)) errors.push(`${name}: números diferentes (valores ficam em pt-BR) em "${key}" → "${v}"`);
     for (const b of BRANDS) if (hasBrand(key, b) && !hasBrand(v, b)) errors.push(`${name}: a marca "${b}" sumiu em "${key}" → "${v}"`);
   }
   for (const key of Object.keys(tr[l])) if (!uses.has(key)) errors.push(`${name}: tradução que o código não usa mais: "${key}"`);

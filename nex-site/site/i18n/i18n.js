@@ -6,6 +6,7 @@
      com os filhos como <0>…</0>, <1>…</1>. [data-i18n-words] traduz um título montado palavra por palavra.
    - JS: t('Texto com {{x}}', { x }); constantes marcadas com tx('texto') e traduzidas ao mostrar, com t(constante).
    - NEX_I18N.apply() traduz o que já foi carregado da página; chame antes dos scripts que leem os textos.
+   - Idioma: ?lang=en-US no endereço (bom para anúncios por país) > escolha guardada > idioma do navegador > pt-BR.
    Conferência: node tools/i18n/check.mjs (na raiz do repositório). */
 (() => {
   const ORIGINAL = 'pt-BR';
@@ -20,15 +21,29 @@
       flag: '<svg viewBox="0 0 24 24"><path fill="#d80027" d="M0 0h24v24H0z"/><path fill="#ffda44" d="M0 6h24v12H0z"/></svg>' },
   ];
 
-  /* ---------- idioma escolhido (localStorage; funciona sem) ---------- */
+  /* ---------- idioma: ?lang= no endereço > escolha guardada > idioma do navegador > pt-BR ---------- */
   const KEY = 'nex-idioma';
   const store = {
     get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } },
     set(v) { try { localStorage.setItem(KEY, v); } catch (e) {} },
   };
-  const saved = store.get();
-  const lang = LANGS.some(l => l.code === saved) ? saved : ORIGINAL;
-  const setLang = code => { store.set(code); location.reload(); };
+  const valid = code => LANGS.some(l => l.code === code);
+  const fromUrl = new URLSearchParams(location.search).get('lang');
+  if (valid(fromUrl)) store.set(fromUrl);
+  // buscadores, prévias de link e medições (Lighthouse) veem sempre o original
+  const detect = () => {
+    if (/bot|crawl|spider|slurp|preview|lighthouse|google|facebookexternalhit/i.test(navigator.userAgent || '')) return null;
+    for (const tag of navigator.languages || [navigator.language || '']) {
+      const [base, region] = String(tag).toLowerCase().split('-');
+      if (base === 'pt') return region && region !== 'br' ? 'pt-PT' : 'pt-BR';
+      if (base === 'en') return 'en-US';
+      if (base === 'es') return 'es-ES';
+    }
+    return null;
+  };
+  const lang = [fromUrl, store.get(), detect()].find(valid) || ORIGINAL;
+  // a escolha vai também no endereço: funciona com o storage bloqueado e o link pode ser compartilhado
+  const setLang = code => { store.set(code); const u = new URL(location.href); u.searchParams.set('lang', code); location.href = u.href; };
 
   /* ---------- tradução ---------- */
   const dict = Object.create(null);
@@ -100,6 +115,13 @@
       walk(document.documentElement, (key, kind, node, set) => { if (set && !done.has(node)) todo.push([key, node, set]); });
       todo.forEach(([key, node, set]) => { if (dict[key]) set(t(key)); done.add(node); });
     }
+    // veio com ?lang=: os links para as outras páginas do site levam o idioma junto
+    if (valid(fromUrl)) document.querySelectorAll('a[href]').forEach(a => {
+      if (a.getAttribute('href').startsWith('#')) return;
+      const u = new URL(a.href);
+      if (u.origin !== location.origin) return;
+      u.searchParams.set('lang', lang); a.href = u.href;
+    });
     document.querySelectorAll('[data-lang-picker]').forEach(box => { if (!box.firstChild) mountPicker(box); });
   }
 

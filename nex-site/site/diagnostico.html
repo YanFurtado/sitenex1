@@ -42,7 +42,7 @@ p{margin:0}
 .top a.back{font-size:14px;color:var(--muted);text-decoration:none;display:inline-flex;gap:8px;align-items:center}
 .top a.back:hover{color:var(--fg)}
 .logo svg{height:24px;width:auto;fill:#5B2BFF;filter:drop-shadow(0 0 10px rgba(91,43,255,.6));display:block}
-.top .lang{margin-left:auto}
+.top .lang{margin-left:auto;margin-block:-8px} /* não aumenta a altura do topo */
 
 /* Intro */
 .eyebrow{font:500 12px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#b9a3ff}
@@ -345,7 +345,7 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
       </div>
       <span class="copied" id="r-copied" hidden>Resumo copiado.</span>
       <div class="sel" id="r-sel" hidden></div>
-      <p class="foot-note">Um especialista da NEX vai analisar suas respostas e mostrar, numa reunião de apresentação, como resolver cada ponto. Atendimento das 8h às 18h.</p>
+      <p class="foot-note">Um especialista da NEX vai analisar suas respostas e mostrar, numa reunião de apresentação, como resolver cada ponto.</p>
       <button type="button" class="btn btn-ghost" id="r-redo" style="align-self:flex-start">Refazer diagnóstico</button>
     </div>
 
@@ -409,7 +409,7 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
       let valid;
       if (el.matches('fieldset')) valid = !!el.querySelector('input:checked');
       else { const i = el.querySelector('input,select'); const v = i.value.trim();
-        valid = i.id === 'whats' ? v.replace(/\D/g, '').length >= 10 : !!v; }
+        valid = i.id === 'whats' ? phoneOk(v) : !!v; }
       el.classList.toggle('invalid', !valid);
       if (!valid) { ok = false; first ||= el; }
     });
@@ -424,9 +424,18 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
     const box = e.currentTarget, max = +box.dataset.max;
     if (box.querySelectorAll('input:checked').length > max) e.target.checked = false;
   });
-  // máscara simples de telefone
+  // WhatsApp: começando com "+" é internacional (código do país + número, 8 a 15 dígitos); sem "+", brasileiro com DDD
+  const phoneOk = v => { const n = v.replace(/\D/g, '').length; return v.startsWith('+') ? n >= 8 && n <= 15 : n >= 10; };
+  $('whats').placeholder = t('(00) 00000-0000');
+  // máscara simples de telefone: (00) 00000-0000; internacional fica como a pessoa digitou ("+", dígitos, espaço, hífen, parênteses)
   $('whats').addEventListener('input', e => {
-    const d = e.target.value.replace(/\D/g, '').slice(0, 11);
+    const v = e.target.value;
+    if (v.trimStart().startsWith('+')) {
+      let n = 0;
+      e.target.value = '+' + [...v.replace(/[^\d ()-]/g, '').replace(/ {2,}/g, ' ').replace(/^ /, '')].filter(c => !/\d/.test(c) || ++n <= 15).join('');
+      return;
+    }
+    const d = v.replace(/\D/g, '').slice(0, 11);
     e.target.value = d.length > 10 ? `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`
       : d.length > 6 ? `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`
       : d.length > 2 ? `(${d.slice(0, 2)}) ${d.slice(2)}` : d;
