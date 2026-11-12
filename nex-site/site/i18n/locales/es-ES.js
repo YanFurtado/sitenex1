@@ -179,7 +179,7 @@ NEX_I18N.add('es-ES', {
   "Suporte": "Soporte",
   "Redes sociais": "Redes sociales",
   "Instagram da NEX": "Instagram de NEX",
-  "WhatsApp da NEX: +55 87 99130-2323": "WhatsApp de NEX: +55 87 99130-2323",
+  "WhatsApp da NEX: +55 87 98857-8910": "WhatsApp de NEX: +55 87 98857-8910",
   "Legal": "Legal",
   "LGPD": "LGPD",
   "Segurança": "Seguridad",
