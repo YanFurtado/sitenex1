@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script src="i18n/i18n.js"></script>
+<script src="pixel.js"></script>
 <title>Diagnóstico NEX</title>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
@@ -146,11 +147,12 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
 </style>
 </head>
 <body>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1981197856191962&amp;ev=PageView&amp;noscript=1"></noscript>
 <div class="wrap">
   <header class="top">
-    <a class="back" href="./" data-back>← Voltar para o site</a>
+    <a class="back" href="./" data-back data-px="Voltar para o site">← Voltar para o site</a>
     <div class="lang" data-lang-picker translate="no"></div>
-    <a class="logo" href="./" data-back aria-label="NEX" translate="no"><svg viewBox="100 15 1820 640"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
+    <a class="logo" href="./" data-back data-px="Logo (voltar para o site)" aria-label="NEX" translate="no"><svg viewBox="100 15 1820 640"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
   </header>
 
   <section class="intro" id="intro">
@@ -330,7 +332,7 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
         </div><span class="err">Escolha uma opção.</span>
       </fieldset>
       <div class="field"><label for="obs">Quer contar mais alguma coisa? <small>(opcional)</small></label><textarea id="obs" name="obs" placeholder="Ex.: perdemos muitos pacientes que chamam depois das 18h"></textarea></div>
-      <p class="consent" data-i18n>Ao ver o resultado, você concorda que a NEX use estas respostas para entrar em contato, conforme a <a href="https://nexinteligence.com.br/privacidade" target="_blank" rel="noopener">Política de privacidade</a>.</p>
+      <p class="consent" data-i18n>Ao ver o resultado, você concorda que a NEX use estas respostas para entrar em contato, conforme a <a href="https://nexinteligence.com.br/privacidade" data-px="Política de privacidade" target="_blank" rel="noopener">Política de privacidade</a>.</p>
     </div>
 
     <!-- Resultado -->
@@ -343,17 +345,17 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
       <div><h3 style="font-size:18px;margin-bottom:14px">Saúde do seu comercial por área</h3><div class="areas" id="r-areas"></div></div>
       <div><h3 style="font-size:18px;margin-bottom:14px">O que resolve, por ordem de prioridade</h3><div class="recs" id="r-recs"></div></div>
       <div class="nav">
-        <a class="btn btn-wa" id="r-wa" href="#" target="_blank" rel="noopener">Enviar diagnóstico no WhatsApp →</a>
-        <button type="button" class="btn btn-ghost" id="r-copy">Copiar resumo</button>
+        <a class="btn btn-wa" id="r-wa" data-px="Enviar diagnóstico no WhatsApp" data-px-evento="Contact" href="#" target="_blank" rel="noopener">Enviar diagnóstico no WhatsApp →</a>
+        <button type="button" class="btn btn-ghost" id="r-copy" data-px="Copiar resumo">Copiar resumo</button>
       </div>
       <span class="copied" id="r-copied" hidden>Resumo copiado.</span>
       <div class="sel" id="r-sel" hidden></div>
       <p class="foot-note">Um especialista da NEX vai analisar suas respostas e mostrar, numa reunião de apresentação, como resolver cada ponto.</p>
-      <button type="button" class="btn btn-ghost" id="r-redo" style="align-self:flex-start">Refazer diagnóstico</button>
+      <button type="button" class="btn btn-ghost" id="r-redo" data-px="Refazer diagnóstico" style="align-self:flex-start">Refazer diagnóstico</button>
     </div>
 
     <div class="nav" id="nav">
-      <button type="button" class="btn btn-ghost" id="prev" hidden>← Voltar</button>
+      <button type="button" class="btn btn-ghost" id="prev" data-px="Voltar etapa" hidden>← Voltar</button>
       <button type="submit" class="btn btn-primary" id="next" style="margin-left:auto">Continuar →</button>
     </div>
   </form>
@@ -367,6 +369,9 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
   const form = document.getElementById('form');
   const steps = [...form.querySelectorAll('.step')];
   const TOTAL = 5;
+  const ETAPAS = ['Sobre você', 'Captação', 'Atendimento', 'Gestão', 'Objetivo']; // nomes fixos em pt-BR para o Pixel
+  const px = (...a) => window.nexTrack && nexTrack(...a);
+  px('ViewContent', { content_name: 'Diagnóstico comercial' });
   let cur = 1;
   const $ = id => document.getElementById(id);
   const STORE = 'nex-diagnostico';
@@ -447,6 +452,7 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
   form.addEventListener('submit', e => {
     e.preventDefault();
     if (!validate(cur)) return;
+    if (cur < TOTAL) px('DiagnosticoEtapa', { etapa: cur, nome: ETAPAS[cur - 1] }, true);
     cur++; if (cur > TOTAL) renderResult();
     show(cur); save();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -493,6 +499,7 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
     const d = collect(), sc = scoreAll(d);
     const keys = Object.keys(sc);
     const total = Math.round(keys.reduce((a, k) => a + sc[k], 0) / keys.length);
+    px('Lead', { content_name: 'Diagnóstico comercial', segmento: d.segmento, pontuacao: total }); // sem nome nem telefone
     const first = (d.nome || '').trim().split(/\s+/)[0] || 'Seu';
     // prioridade = déficit + bônus se a pessoa marcou o desafio dessa área
     const ranked = keys.map(k => ({ k, s: sc[k], p: (100 - sc[k]) + ((d.desafio || []).some(x => AREAS[k].desafio.includes(x)) ? 15 : 0) }))

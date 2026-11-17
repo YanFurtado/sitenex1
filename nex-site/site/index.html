@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script src="i18n/i18n.js"></script>
+<script src="pixel.js"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -536,26 +537,27 @@ footer{border-top:1px solid rgba(91,43,255,.3);background:linear-gradient(to bot
 .skip{position:fixed;left:16px;top:-60px;z-index:200;padding:10px 16px;border-radius:10px;background:#fff;color:#0b0b12;font-weight:600;transition:top .2s}
 .skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
 section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-intrinsic-size:auto 900px}
-@media(max-width:700px){.card,.phone,.badge,.mock,.nav.scrolled,.fc-bg,.ck-bar,.map-card{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}.nav.scrolled{background:rgba(8,8,12,.94)}.mock{background:#120d22}}
+@media(max-width:700px){.card,.phone,.badge,.mock,.nav.scrolled,.fc-bg,.map-card{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}.nav.scrolled{background:rgba(8,8,12,.94)}.mock{background:#120d22}}
 @media (hover:none){.card::before,.card::after{display:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1981197856191962&amp;ev=PageView&amp;noscript=1"></noscript>
 
 
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <header class="nav" id="nav">
   <div class="wrap">
-    <a href="#top" class="logo"><svg class="logo-svg" viewBox="100 15 1820 640" role="img" aria-label="NEX"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
+    <a href="#top" class="logo" data-px="Logo (menu)"><svg class="logo-svg" viewBox="100 15 1820 640" role="img" aria-label="NEX"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
     <ul>
-      <li><a href="#produto">Produto</a></li>
-      <li><a href="#como-funciona">Como funciona</a></li>
-      <li><a href="#clientes">Clientes</a></li>
+      <li><a href="#produto" data-px="Menu: Produto">Produto</a></li>
+      <li><a href="#como-funciona" data-px="Menu: Como funciona">Como funciona</a></li>
+      <li><a href="#clientes" data-px="Menu: Clientes">Clientes</a></li>
     </ul>
     <div class="nav-end">
       <div class="lang" data-lang-picker translate="no"></div>
-      <a href="#demo" class="btn btn-primary btn-sm mag">Fale conosco</a>
+      <a href="#demo" class="btn btn-primary btn-sm mag" data-px="Fale conosco (menu)">Fale conosco</a>
     </div>
   </div>
 </header>
@@ -566,7 +568,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
     <canvas class="web" id="web" aria-hidden="true"></canvas>
     <div class="web-fade" aria-hidden="true"></div>
     <div class="wrap">
-      <a href="#produto" class="badge"><span class="dot"></span>Novo: agente de IA que atende, qualifica e agenda <span>→</span></a>
+      <a href="#produto" class="badge" data-px="Selo: agente de IA"><span class="dot"></span>Novo: agente de IA que atende, qualifica e agenda <span>→</span></a>
       <div class="nex-logo-slot"><svg class="hero-logo" viewBox="100 15 1820 640" role="img" aria-label="NEX"><defs><linearGradient id="hlg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7A5CFF"/><stop offset=".55" stop-color="#4B1EF0"/><stop offset="1" stop-color="#3512C4"/></linearGradient></defs><g fill="url(#hlg)"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></g></svg></div>
       <h1 data-i18n-words>
         <span class="w"><span style="animation-delay:0.32s">Seu</span></span>
@@ -577,15 +579,15 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
       </h1>
       <p class="sub">A NEX une CRM, funil e Inteligência Artificial em um só lugar. Cada lead é respondido em segundos, qualificado e levado até a venda, 24 horas por dia, sem depender de planilha nem de memória.</p>
       <div class="ctas">
-        <a href="#demo" class="btn btn-primary mag">Fale conosco <span class="arr">→</span></a>
-        <a href="#produto" class="btn btn-ghost mag" data-s=".2">Ver a NEX em ação</a>
+        <a href="#demo" class="btn btn-primary mag" data-px="Fale conosco (topo)">Fale conosco <span class="arr">→</span></a>
+        <a href="#produto" class="btn btn-ghost mag" data-px="Ver a NEX em ação" data-s=".2">Ver a NEX em ação</a>
       </div>
       <p class="micro">Implantação guiada · Agente treinado no seu negócio · Teste antes de publicar</p>
 
       <div class="tabs-sys hero-tabs" role="tablist">
-      <button class="tab-sys on" data-t="dash" role="tab"><b>Dashboard</b><small>Leads, valores e conversão em tempo real</small><i class="pr"></i></button>
-      <button class="tab-sys" data-t="pipe" role="tab"><b>Pipeline</b><small>Cada negociação na etapa certa</small><i class="pr"></i></button>
-      <button class="tab-sys" data-t="chat" role="tab"><b>Conversas</b><small>WhatsApp da equipe e da IA juntos</small><i class="pr"></i></button>
+      <button class="tab-sys on" data-t="dash" role="tab" data-px="Aba: Dashboard"><b>Dashboard</b><small>Leads, valores e conversão em tempo real</small><i class="pr"></i></button>
+      <button class="tab-sys" data-t="pipe" role="tab" data-px="Aba: Pipeline"><b>Pipeline</b><small>Cada negociação na etapa certa</small><i class="pr"></i></button>
+      <button class="tab-sys" data-t="chat" role="tab" data-px="Aba: Conversas"><b>Conversas</b><small>WhatsApp da equipe e da IA juntos</small><i class="pr"></i></button>
     </div>
     
       <div class="stage">
@@ -774,7 +776,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
       <h2 id="final-h" data-i18n>Seu próximo cliente já está chamando. <span class="hl-y">Quem vai responder?</span></h2>
       <p id="final-p">Agende uma reunião de apresentação e veja, na prática, como a NEX funciona dentro do seu negócio. Tudo isso antes de decidir qualquer coisa.</p>
       <div class="ctas" id="final-cta" style="margin-top:44px">
-        <a href="#demo" class="btn btn-primary mag">Agendar minha apresentação <span class="arr">→</span></a>
+        <a href="#demo" class="btn btn-primary mag" data-px="Agendar minha apresentação">Agendar minha apresentação <span class="arr">→</span></a>
       </div>
       <p class="final-micro" id="final-micro">Sem compromisso · Conversa com um especialista · Você decide depois</p>
     </section>
@@ -784,29 +786,29 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
 <footer>
   <div class="wrap ft-top">
     <div class="ft-brand">
-      <a href="#top" class="logo"><svg class="logo-svg" viewBox="100 15 1820 640" role="img" aria-label="NEX"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
+      <a href="#top" class="logo" data-px="Logo (rodapé)"><svg class="logo-svg" viewBox="100 15 1820 640" role="img" aria-label="NEX"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
       <p>Inteligência comercial com IA. CRM, funil e atendimento automático para o seu comercial nunca mais dormir.</p>
     </div>
     <div class="ft-col">
       <h4>Produto</h4>
-      <ul><li><a href="#produto">Por que a NEX</a></li><li><a href="#como-funciona">Como funciona</a></li><li><a href="#clientes">Clientes</a></li><li><a href="#demo">Fale conosco</a></li></ul>
+      <ul><li><a href="#produto" data-px="Rodapé: Por que a NEX">Por que a NEX</a></li><li><a href="#como-funciona" data-px="Rodapé: Como funciona">Como funciona</a></li><li><a href="#clientes" data-px="Rodapé: Clientes">Clientes</a></li><li><a href="#demo" data-px="Rodapé: Fale conosco">Fale conosco</a></li></ul>
     </div>
     <div class="ft-col">
       <h4>Informações</h4>
-      <ul><li><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Termos de uso</a></li><li><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Política de privacidade</a></li><li><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">LGPD e segurança de dados</a></li><li><a href="#">Suporte</a></li></ul>
+      <ul><li><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé: Termos de uso">Termos de uso</a></li><li><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé: Política de privacidade">Política de privacidade</a></li><li><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé: LGPD e segurança de dados">LGPD e segurança de dados</a></li><li><a href="#" data-px="Rodapé: Suporte">Suporte</a></li></ul>
     </div>
     <div class="ft-col">
       <h4>Redes sociais</h4>
       <div class="socials">
-        <a href="https://www.instagram.com/nex_intelligence/" target="_blank" rel="noopener" aria-label="Instagram da NEX"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4.7a5.1 5.1 0 1 0 0 10.2 5.1 5.1 0 0 0 0-10.2zm0 8.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.3-9.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg></a>
-        <a href="https://wa.me/5587988578910" target="_blank" rel="noopener" aria-label="WhatsApp da NEX: +55 87 98857-8910"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg></a>
+        <a href="https://www.instagram.com/nex_intelligence/" target="_blank" rel="noopener" aria-label="Instagram da NEX" data-px="Instagram (rodapé)"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4.7a5.1 5.1 0 1 0 0 10.2 5.1 5.1 0 0 0 0-10.2zm0 8.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.3-9.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg></a>
+        <a href="https://wa.me/5587988578910" target="_blank" rel="noopener" aria-label="WhatsApp da NEX: +55 87 98857-8910" data-px="WhatsApp (rodapé)" data-px-evento="Contact"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg></a>
       </div>
     </div>
   </div>
   <div class="ft-legal">
     <div class="wrap">
       <div>
-        <nav aria-label="Legal"><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Termos de uso</a><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Política de privacidade</a><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">LGPD</a><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Segurança</a><a href="#demo">Contato</a><a href="#">Preferências de cookies</a></nav>
+        <nav aria-label="Legal"><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé (legal): Termos de uso">Termos de uso</a><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé (legal): Política de privacidade">Política de privacidade</a><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé (legal): LGPD">LGPD</a><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé (legal): Segurança">Segurança</a><a href="#demo" data-px="Rodapé (legal): Contato">Contato</a></nav>
         <p>© 2026 Cnx Marketing e Tecnologia. Todos os direitos reservados. M. Leite Empreendimento em Marketing Ltda · CNPJ 47.633.832/0001-09. NEX é um produto da Conexão | Marketing e Tecnologia.</p>
       </div>
       <div class="made">Um produto da<b translate="no">Conexão <span class="made-sep">|</span> Marketing e Tecnologia</b></div>
@@ -841,141 +843,21 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
 })();
 </script>
 
-<!-- COOKIES: banner + painel de preferências -->
-<style>
-.ck-bar{position:fixed;z-index:85;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(440px,calc(100% - 32px));padding:20px;border-radius:20px;border:1px solid rgba(139,92,246,.5);background:rgba(16,11,36,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 24px 70px -20px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.03);text-align:left;animation:ckIn .6s var(--ease) both}
-@keyframes ckIn{from{opacity:0;transform:translateY(20px)}}
-.ck-bar b{display:block;font:600 16px var(--f-display);letter-spacing:-.01em}
-.ck-bar p{margin-top:6px;font-size:13.5px;color:#c9c0ef;line-height:1.55}
-.ck-bar p a,.ck-panel a{color:#c4b5fd;text-decoration:underline;text-underline-offset:2px}
-.ck-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
-.ck-btn{padding:11px 12px;border-radius:12px;font:600 13.5px var(--f-body);cursor:pointer;border:1px solid rgba(139,92,246,.6);background:#7C3AED;color:#fff;transition:background .2s}
-.ck-btn:hover{background:#8B5CF6}
-.ck-link{margin-top:10px;background:none;border:0;padding:0;font:600 13px var(--f-body);color:#c4b5fd;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-.ck-modal{position:fixed;inset:0;z-index:95;display:grid;place-items:center;padding:20px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px))}
-.ck-modal[hidden],.ck-bar[hidden]{display:none!important}
-.ck-bg{position:absolute;inset:0;background:rgba(5,4,12,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.ck-panel{position:relative;width:min(540px,100%);max-height:calc(100vh - 40px);overflow:auto;border-radius:24px;padding:clamp(22px,4vw,30px);text-align:left;border:1px solid rgba(91,43,255,.6);background:linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f);box-shadow:0 40px 120px -20px rgba(91,43,255,.7);animation:ckIn .45s var(--ease) both}
-.ck-panel h3{font-size:24px;font-weight:600;padding-right:40px}
-.ck-panel>p{margin-top:8px;font-size:14px;color:#c9c0ef}
-.ck-x{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(160,130,255,.35);background:rgba(255,255,255,.04);color:#fff;font-size:16px;cursor:pointer}
-.ck-cats{display:flex;flex-direction:column;gap:10px;margin-top:20px}
-.ck-cat{padding:14px 16px;border-radius:16px;border:1px solid rgba(160,130,255,.25);background:rgba(7,6,15,.5)}
-.ck-cat-hd{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.ck-cat-hd b{font-size:15px}
-.ck-cat p{margin-top:6px;font-size:13px;color:#b9b0e0;line-height:1.5}
-.ck-cat small{display:block;margin-top:6px;font:500 11px var(--f-mono);color:#8a80b8}
-.ck-always{font:600 11.5px var(--f-mono);color:#3ddc97;white-space:nowrap}
-.ck-sw{position:relative;flex:none;display:inline-flex;cursor:pointer}
-.ck-sw input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
-.ck-sw i{width:42px;height:24px;border-radius:99px;background:rgba(255,255,255,.15);position:relative;transition:background .25s}
-.ck-sw i::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .25s var(--ease)}
-.ck-sw input:checked+i{background:#7C3AED}.ck-sw input:checked+i::after{transform:translateX(18px)}
-.ck-sw input:focus-visible+i{outline:2px solid var(--accent-2);outline-offset:2px}
-.ck-acts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:20px}
-.ck-acts .ck-btn.ghost{background:transparent;color:#e4dcff;border-color:rgba(160,130,255,.4)}
-.ck-acts .ck-btn.ghost:hover{background:rgba(255,255,255,.06)}
-.ck-saved{margin-top:12px;font:500 12px var(--f-mono);color:#3ddc97;text-align:center}
-@media(max-width:520px){.ck-acts{grid-template-columns:1fr}.ck-row{grid-template-columns:1fr}}
-</style>
-<div class="ck-bar" id="ck-bar" role="region" aria-label="Aviso de cookies" hidden>
-  <b>Sua privacidade, sua escolha</b>
-  <p data-i18n>Usamos cookies para o site funcionar e, com sua permissão, para medir os resultados dos nossos anúncios no Facebook e no Instagram. Saiba mais nos <a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Termos e Política</a>.</p>
-  <div class="ck-row"><button type="button" class="ck-btn" data-ck="all">Aceitar todos</button><button type="button" class="ck-btn" data-ck="none">Recusar opcionais</button></div>
-  <button type="button" class="ck-link" data-ck="open">Personalizar</button>
-</div>
-<div class="ck-modal" id="ck-modal" role="dialog" aria-modal="true" aria-labelledby="ck-title" hidden>
-  <div class="ck-bg" data-ck="close"></div>
-  <div class="ck-panel">
-    <button type="button" class="ck-x" data-ck="close" aria-label="Fechar">✕</button>
-    <span class="eyebrow">Preferências de cookies</span>
-    <h3 id="ck-title" style="margin-top:10px">Escolha o que podemos usar</h3>
-    <p>Você pode mudar estas escolhas quando quiser pelo link "Preferências de cookies", no rodapé.</p>
-    <div class="ck-cats">
-      <div class="ck-cat"><div class="ck-cat-hd"><b>Necessários</b><span class="ck-always">Sempre ativos</span></div><p>Fazem o site funcionar e guardam a sua escolha de cookies. Não podem ser desligados.</p><small>Preferência de consentimento · segurança</small></div>
-      <div class="ck-cat"><div class="ck-cat-hd"><b>Marketing</b><label class="ck-sw"><input type="checkbox" id="ck-mk" aria-label="Cookies de marketing"><i></i></label></div><p>Medem os resultados dos anúncios da NEX no Facebook e no Instagram e ajudam a mostrar anúncios mais relevantes.</p><small translate="no">Meta Pixel</small></div>
-    </div>
-    <div class="ck-acts"><button type="button" class="ck-btn ghost" data-ck="none">Recusar opcionais</button><button type="button" class="ck-btn ghost" data-ck="save">Salvar escolhas</button><button type="button" class="ck-btn" data-ck="all">Aceitar todos</button></div>
-    <p class="ck-saved" id="ck-saved" hidden>Preferências salvas.</p>
-  </div>
-</div>
-<script>
-/* Consentimento de cookies (LGPD).
-   Nenhuma tag opcional roda antes do aceite. Para ativar, preencha os IDs abaixo. */
-(() => {
-  const CFG = {
-    metaPixel: ''   // ← cole aqui o ID do Pixel da Meta, ex.: '123456789012345'
-  };
-  const KEY = 'nex-cookie-consent-v1';
-  const $ = id => document.getElementById(id);
-  const bar = $('ck-bar'), modal = $('ck-modal'), mk = $('ck-mk');
-  const read = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } };
-  const write = c => { try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {} };
-  const loaded = {};
-  const addScript = src => { const s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); };
-  function apply(c) {
-    window.nexConsent = c;
-    if (c.marketing && CFG.metaPixel && !loaded.px) { loaded.px = 1;
-      !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s) }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', CFG.metaPixel); fbq('track', 'PageView'); }
-    document.dispatchEvent(new CustomEvent('nex:consent', { detail: c }));
-  }
-  function decide(c) {
-    c.date = new Date().toISOString(); write(c); apply(c);
-    bar.hidden = true;
-    if (!modal.hidden) { $('ck-saved').hidden = false; setTimeout(closePanel, 700); }
-  }
-  let last = null;
-  function openPanel(trigger) {
-    last = trigger || document.activeElement;
-    const c = read() || { marketing: false };
-    mk.checked = !!c.marketing; $('ck-saved').hidden = true;
-    modal.hidden = false; document.documentElement.style.overflow = 'hidden'; modal.querySelector('.ck-x').focus();
-  }
-  function closePanel() { modal.hidden = true; document.documentElement.style.overflow = ''; last && last.focus && last.focus(); }
-  document.addEventListener('click', e => {
-    const t = e.target.closest('[data-ck]'); if (!t) return;
-    const a = t.dataset.ck;
-    if (a === 'all') decide({ marketing: true });
-    else if (a === 'none') decide({ marketing: false });
-    else if (a === 'save') decide({ marketing: mk.checked });
-    else if (a === 'open') openPanel(t);
-    else if (a === 'close') closePanel();
-  });
-  document.querySelectorAll('a').forEach(l => { if (l.textContent.trim() === NEX_I18N.t('Preferências de cookies')) { l.setAttribute('href', '#cookies'); l.setAttribute('role', 'button'); l.addEventListener('click', e => { e.preventDefault(); openPanel(l); }); } });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) closePanel(); });
-
-  /* Eventos de conversão do Meta Pixel (só disparam com consentimento de marketing e Pixel carregado). */
-  const track = (name, params) => { try { if (window.nexConsent && window.nexConsent.marketing && window.fbq) fbq('track', name, params || {}); } catch (e) {} };
-  window.nexTrack = track;
-  document.addEventListener('click', e => {
-    const a = e.target.closest('a'); if (!a) return;
-    const h = a.getAttribute('href') || '';
-    if (a.classList.contains('pc-btn')) { const plan = a.textContent.replace('Assinar', '').trim(); const val = { Gold: 597, Platinum: 897, Black: 1297 }[plan]; track('InitiateCheckout', { content_name: 'Plano ' + plan, value: val, currency: 'BRL' }); }
-    else if (a.id === 'lead-wa') track('Lead', { content_name: 'Formulário do topo' });
-    else if (h.includes('wa.me')) track('Contact', { content_name: 'WhatsApp' });
-    else if (h.includes('diagnostico.html')) track('ViewContent', { content_name: 'Diagnóstico comercial' });
-  }, true);
-  const saved = read();
-  if (saved) apply(saved); else bar.hidden = false;
-})();
-</script>
-
-<button type="button" class="fc-fab" id="fc-fab" aria-haspopup="dialog"><span class="live"></span>Fale conosco</button>
+<button type="button" class="fc-fab" id="fc-fab" data-px="Fale conosco (botão flutuante)" aria-haspopup="dialog"><span class="live"></span>Fale conosco</button>
 <div class="fc" id="fc" role="dialog" aria-modal="true" aria-labelledby="fc-title" hidden>
   <div class="fc-bg" data-close></div>
   <div class="fc-box">
-    <button type="button" class="fc-x" data-close aria-label="Fechar">✕</button>
+    <button type="button" class="fc-x" data-close data-px="Fechar popup Fale conosco" aria-label="Fechar">✕</button>
     <span class="eyebrow">Fale conosco</span>
     <h3 id="fc-title">Como você prefere começar?</h3>
     <p>Em 3 minutos você descobre onde seu comercial está perdendo vendas. Ou fale direto com o nosso time.</p>
     <div class="fc-opts">
-      <a class="fc-opt main" href="diagnostico.html">
+      <a class="fc-opt main" href="diagnostico.html" data-px="Popup: Fazer o diagnóstico">
         <span class="fc-ic"><svg viewBox="0 0 24 24"><path d="M4 19h16v2H4zM6 10h3v7H6zm5-4h3v11h-3zm5 7h3v4h-3z"/></svg></span>
         <span><b>Fazer o diagnóstico do meu comercial</b><small>5 etapas rápidas. Você vê na hora os pontos fracos e o que resolve cada um.</small></span>
         <span class="go">→</span>
       </a>
-      <a class="fc-opt" href="https://wa.me/5587988578910?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20NEX%20e%20quero%20agendar%20uma%20apresenta%C3%A7%C3%A3o." target="_blank" rel="noopener">
+      <a class="fc-opt" data-px="Popup: Falar no WhatsApp" data-px-evento="Contact" href="https://wa.me/5587988578910?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20NEX%20e%20quero%20agendar%20uma%20apresenta%C3%A7%C3%A3o." target="_blank" rel="noopener">
         <span class="fc-ic wa"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg></span>
         <span><b>Falar agora no WhatsApp</b><small>+55 87 98857-8910</small></span>
         <span class="go">→</span>
