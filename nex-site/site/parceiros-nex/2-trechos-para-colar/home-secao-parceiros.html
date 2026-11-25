@@ -1,0 +1,65 @@
+<!-- ==========================================================================
+     SEÇÃO "REDE DE PARCEIROS" PARA A HOME
+     Os arquivos de 1-arquivos-do-site/ precisam estar na raiz do site.
+     ========================================================================== -->
+
+
+<!-- ===== BLOCO 1: cole no <head> da Home ===== -->
+<!-- Fontes da NEX (pule se o site já carrega Bricolage Grotesque, Manrope e JetBrains Mono) -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<!-- Visual da seção de parceiros -->
+<link rel="stylesheet" href="/parceiros.css?v=2">
+<!-- SÓ se o site NÃO usa o design da NEX (.btn, .purple-card, .sec-head, .eyebrow):
+     copie 2-trechos-para-colar/parceiros-home-base.css para a raiz do site e tire esta linha do comentário. -->
+<!-- <link rel="stylesheet" href="/parceiros-home-base.css?v=1"> -->
+<!-- Meta Pixel (pule se o site já tem o Pixel 4820743728147875 instalado; ver LEIA-ME, passo 6) -->
+<script src="/nex-pixel.js?v=1"></script>
+
+
+<!-- ===== BLOCO 2: cole onde a seção deve aparecer (sugestão: antes do CTA final / rodapé) ===== -->
+<section class="sec" id="parceiros" style="padding-top:40px" aria-labelledby="pt-title">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Rede de parceiros</span>
+      <h2 id="pt-title">Quem implanta a NEX com você.</h2>
+      <p>Parceiros certificados configuram o CRM, o Agente de IA e as automações do jeito do seu negócio, e treinam o seu time para usar tudo desde o primeiro dia.</p>
+    </div>
+    <div class="pt-home">
+      <article class="pt-feat purple-card rv" id="pt-home-feat" aria-label="Parceiro oficial em destaque"></article>
+      <article class="pt-more rv" aria-labelledby="pt-more-t">
+        <div class="pt-stack"><ul id="pt-home-stack" aria-hidden="true"></ul><span class="pt-count" id="pt-home-count">Parceiros homologados</span></div>
+        <h3 id="pt-more-t">Explore nossa rede de especialistas</h3>
+        <p>Consultores e agências certificados pela NEX, cada um focado num nicho: clínicas, imobiliárias, e-commerce, vendas B2B e serviços. Filtre por especialidade e encontre quem já conhece o seu mercado.</p>
+        <a class="btn btn-ghost" href="/parceiros">Encontrar um parceiro <span class="arr">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== BLOCO 3: cole antes do </body> ===== -->
+<!-- Aviso de cookies (pule se o site já tem um; ver LEIA-ME, passo 6) -->
+<script src="/nex-cookies.js?v=1"></script>
+<script src="/parceiros-data.js?v=2"></script>
+<script>
+/* Seção "Rede de parceiros" da Home: card do parceiro em destaque + convite para o diretório (dados em parceiros-data.js). */
+(() => {
+  const list = window.NEX_PARTNERS, h = window.nexPartners;
+  const feat = document.getElementById('pt-home-feat');
+  if (!list || !h || !feat) return;
+  const p = list.find(x => x.featured) || list[0];
+  const others = list.filter(x => x !== p);
+  feat.innerHTML = `
+    <span class="pt-seal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>Parceiro Oficial em Destaque</span>
+    <div class="pt-head">${h.logoHTML(p)}<div><h3>${h.esc(p.name)}</h3><span class="pt-loc">${h.esc(p.location)}</span></div></div>
+    <p>${h.esc(p.shortDescription)}</p>
+    <ul class="pt-tags" aria-label="Especialidades">${p.specialties.map(s => `<li>${h.esc(s)}</li>`).join('')}</ul>
+    <div class="pt-acts">
+      <a class="btn btn-primary" href="${h.esc(p.contactUrl)}" target="_blank" rel="noopener" data-meta-event="Contact" data-meta-name="Parceiro ${h.esc(p.name)} (Home)">Falar com a ${h.esc(p.name.replace(/^Assessoria\s+/, ''))} <span class="arr">→</span></a>
+      <a class="btn btn-ghost" href="${h.profileUrl(p)}">Ver detalhes</a>
+    </div>`;
+  document.getElementById('pt-home-stack').innerHTML = others.slice(0, 5).map(x => `<li>${h.logoHTML(x)}</li>`).join('');
+  document.getElementById('pt-home-count').textContent = `+${others.length} parceiros homologados`;
+})();
+</script>

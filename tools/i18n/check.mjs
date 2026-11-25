@@ -1,6 +1,6 @@
 /* Confere as traduções do site (nex-site/site).
    Junta toda chave usada: textos do HTML (com as mesmas regras de i18n.js, rodando no jsdom) e chamadas
-   t("…"), tx("…") e NEX_I18N.t("…") nos scripts, lidas pela árvore do TypeScript (comentários não contam).
+   t("…"), tx("…") e NEX_I18N.t("…") nos scripts das páginas e nos .js da raiz do site (ex.: parceiros.js), lidas pela árvore do TypeScript (comentários não contam).
    Falha quando: falta tradução, tradução vazia, {{variáveis}} ou <0>marcações</0> diferentes do original,
    número diferente (valores ficam no formato pt-BR; máscaras sem letras podem mudar), marca que sumiu, chave repetida, tradução que o código
    não usa mais, chave montada em tempo de execução ou erro de sintaxe.
@@ -68,6 +68,7 @@ for (const page of readdirSync(SITE).filter(f => f.endsWith('.html'))) {
     scanJs(s.textContent, page, dom.nodeLocation(s).startTag.endLine - 1);
 }
 scanJs(i18nSrc, I18N);
+for (const f of readdirSync(SITE).filter(f => f.endsWith('.js'))) scanJs(readFileSync(path.join(SITE, f), 'utf8'), f);
 
 /* ---------- traduções ---------- */
 function readLocale(code) {

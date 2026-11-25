@@ -1,0 +1,3 @@
+# Cole estas 2 linhas no arquivo "_redirects" da raiz do site (Netlify). O "200" mantém o endereço limpo na barra.
+/parceiros    /parceiros.html  200
+/parceiros/*  /parceiro.html   200

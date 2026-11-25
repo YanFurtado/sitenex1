@@ -1,0 +1,5 @@
+# Cole no .htaccess da raiz do site (ou renomeie este arquivo para .htaccess se o site ainda não tiver um).
+# Se o seu .htaccess já tiver "RewriteEngine On", não repita essa linha; cole só as 2 regras logo abaixo dela.
+RewriteEngine On
+RewriteRule ^parceiros/?$ parceiros.html [L]
+RewriteRule ^parceiros/[^/]+/?$ parceiro.html [L]

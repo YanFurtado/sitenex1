@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="/i18n/i18n.js"></script>
+<script src="/pixel.js"></script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>:root{color-scheme:dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Parceiros NEX · Encontre um especialista para implantar seu CRM</title>
+<meta name="description" content="Diretório de parceiros da NEX. Encontre especialistas que implantam o CRM com Agente de IA, automações e integrações no seu negócio.">
+<meta property="og:title" content="Parceiros NEX · Encontre um especialista">
+<meta property="og:description" content="Parceiros certificados para implantar a NEX, o CRM com Agente de IA no WhatsApp, no seu negócio.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#08080c">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Diretório de parceiros (/parceiros). Tokens e base copiados de index.html (manter em sincronia); componentes em parceiros.css */
+:root{
+  --bg:#08080c; --surface:#121219; --surface-2:#191922; --line:rgba(255,255,255,.08); --line-strong:rgba(255,255,255,.16);
+  --fg:#f2f1f6; --muted:#9a98a8; --accent:#7c5cff; --accent-rgb:124,92,255; --accent-2:#2fd3ff; --ok:#3ddc97; --warn:#ffb547;
+  --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"Manrope",ui-sans-serif,system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gutter-l:max(16px,env(safe-area-inset-left,0px)); --gutter-r:max(16px,env(safe-area-inset-right,0px));
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.035em;line-height:1}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent-2);outline-offset:3px;border-radius:999px}
+
+/* NAV */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+.nav{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:50;transition:background .4s var(--ease),border-color .4s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(8,8,12,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+.logo{font-family:var(--f-display);font-weight:700;font-size:22px;letter-spacing:-.04em;display:flex;align-items:center;gap:10px}
+.logo-svg{height:26px;width:auto;fill:#4B1EF0;filter:drop-shadow(0 0 10px rgba(75,30,240,.55));transition:filter .3s}
+.logo:hover .logo-svg{filter:drop-shadow(0 0 16px rgba(75,30,240,.9)) drop-shadow(0 0 22px rgba(63,224,255,.3))}
+.logo i{width:26px;height:26px;border-radius:8px;background:var(--accent);display:grid;place-items:center;font-style:normal;font-size:14px;color:#fff;box-shadow:0 0 24px rgba(var(--accent-rgb),.6)}
+.nav ul{display:flex;gap:30px;list-style:none;margin:0;padding:0;font-size:14px;color:var(--muted)}
+.nav ul a{transition:color .2s}.nav ul a:hover{color:var(--fg)}
+@media(max-width:820px){.nav ul{display:none}}
+
+/* BUTTONS */
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;border-radius:999px;font-weight:600;font-size:15px;padding:14px 26px;transition:box-shadow .35s var(--ease),background .3s,border-color .3s;will-change:transform;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff;overflow:hidden;box-shadow:0 0 0 1px rgba(var(--accent-rgb),.6),0 10px 40px -10px rgba(var(--accent-rgb),.8)}
+.btn-primary:hover{box-shadow:0 0 0 1px rgba(var(--accent-rgb),.9),0 14px 60px -6px rgba(var(--accent-rgb),1)}
+.btn-primary::after{content:"";position:absolute;inset:0 auto 0 -60%;width:45%;transform:skewX(-14deg);background:rgba(255,255,255,.28);filter:blur(10px);transition:left .8s var(--ease)}
+.btn-primary:hover::after{left:130%}
+.btn-ghost{border:1px solid var(--line-strong);color:var(--fg);background:rgba(255,255,255,.02)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.36);background:rgba(255,255,255,.05)}
+.btn .arr{transition:transform .3s var(--ease)}.btn:hover .arr{transform:translateX(4px)}
+.btn-sm{padding:10px 18px;font-size:14px}
+@keyframes shimmer{to{background-position:-220% 0}}
+@keyframes rise{from{opacity:0;transform:translateY(16px);filter:blur(6px)}}
+.ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:40px;animation:rise 1s .9s var(--ease) both}
+/* Reveal: visível em repouso; anima com a rolagem onde o navegador suporta */
+@supports (animation-timeline:view()){
+  .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+  @keyframes rv{from{opacity:0;transform:translateY(34px);filter:blur(8px)}}
+}
+.sec{padding-block:50px}
+.sec-head{max-width:760px;margin:0 auto;text-align:center}
+.sec-head h2{font-size:clamp(34px,5vw,58px);font-weight:600;margin-top:14px;line-height:1.03}
+.sec-head p{margin:18px auto 0;font-size:18px;color:var(--muted);max-width:620px}
+.purple-card{border:1px solid rgba(91,43,255,.55);border-radius:26px;
+  background:radial-gradient(120% 90% at 0% 0%,rgba(91,43,255,.5),transparent 55%),radial-gradient(90% 80% at 100% 100%,rgba(75,30,240,.4),transparent 60%),linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 30px 90px -30px rgba(91,43,255,.7)}
+.cta2{position:relative;isolation:isolate;overflow:hidden;border-radius:36px;margin-block:20px 50px;padding:100px 24px;text-align:center;border:1px solid rgba(91,43,255,.55)}
+.cta2::before{content:"";position:absolute;inset:-50%;z-index:-2;background:conic-gradient(from 0deg,transparent 0 70%,rgba(124,92,255,.9),rgba(47,211,255,.7),transparent 95%);animation:spin 9s linear infinite}
+.cta2::after{content:"";position:absolute;inset:1px;z-index:-1;border-radius:35px;background:radial-gradient(ellipse at 50% 120%,rgba(122,92,255,.55),transparent 60%),linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f)}
+.cta2 .big{font:700 clamp(64px,11vw,140px)/1 var(--f-display);letter-spacing:-.05em;background:linear-gradient(180deg,#fff,#a78bff);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.cta2 .big-l{font:500 12px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#b9a3ff;margin-top:6px}
+.cta2 h2{font-size:clamp(34px,5.4vw,66px);font-weight:700;max-width:880px;margin:30px auto 0;letter-spacing:-.04em}
+.cta2 p{max-width:560px;margin:20px auto 0;font-size:18px;color:#d6ccf7}
+.cta2 .ctas{animation:none;margin-top:40px}
+.cta2 .btn-primary{padding:18px 34px;font-size:16px}
+@keyframes spin{to{transform:rotate(1turn)}}
+/* RODAPÉ — colunas de informação + faixa legal */
+footer{border-top:1px solid rgba(91,43,255,.3);background:linear-gradient(to bottom,#0a0817,#07060f)}
+.ft-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-block:64px 48px}
+.ft-brand p{margin-top:16px;font-size:14px;color:var(--muted);max-width:280px}
+.ft-col h4{margin:0 0 18px;font:600 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#fff}
+.ft-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:14px;color:#c9c0ef}
+.ft-col ul a{transition:color .2s}.ft-col ul a:hover{color:#fff}
+.socials{display:flex;gap:10px}
+.socials a{width:42px;height:42px;border-radius:50%;border:1px solid rgba(160,130,255,.45);display:grid;place-items:center;color:#fff;transition:background .3s,border-color .3s,box-shadow .3s}
+.socials a:hover{background:#4B1EF0;border-color:#4B1EF0;box-shadow:0 0 22px rgba(91,43,255,.8)}
+.socials svg{width:17px;height:17px;fill:currentColor}
+.conexao{display:inline-flex;flex-direction:column;gap:4px;margin-top:20px;padding:12px 16px;border-radius:14px;border:1px solid rgba(160,130,255,.3);background:rgba(91,43,255,.1)}
+.conexao small{font:500 10px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#9d8fd6}
+.conexao b{font-family:var(--f-display);font-size:18px;letter-spacing:-.02em}
+.ft-legal{background:#130a3a;border-top:1px solid rgba(91,43,255,.35)}
+.ft-legal .wrap{display:flex;gap:24px 40px;align-items:flex-start;padding-block:22px}
+.ft-legal nav{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px}
+.ft-legal nav a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.35);color:#e9e4ff}
+.ft-legal nav a:hover{text-decoration-color:#fff;color:#fff}
+.ft-legal p{margin-top:10px;font-size:12.5px;line-height:1.6;color:#b9b0e0}
+.ft-legal .made{margin-left:auto;flex:none;text-align:right;font:500 10px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#9d8fd6}
+.ft-legal .made-sep{color:#8b5cff;font-weight:400;margin:0 4px}
+.ft-legal .made b{display:block;margin-top:4px;font:600 15px var(--f-display);letter-spacing:-.01em;text-transform:none;color:#fff}
+@media(max-width:900px){.ft-top{grid-template-columns:1fr 1fr}.ft-brand{grid-column:1/-1}}
+@media(max-width:620px){.ft-legal .wrap{flex-direction:column}.ft-legal .made{margin-left:0;text-align:left}}
+@media(max-width:460px){.ft-top{grid-template-columns:1fr}}
+.skip{position:fixed;left:16px;top:-60px;z-index:200;padding:10px 16px;border-radius:10px;background:#fff;color:#0b0b12;font-weight:600;transition:top .2s}
+.skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+.cta2 .eyebrow{color:#b9a3ff}
+.cta2 h2{margin-top:18px}
+@media(max-width:700px){.nav.scrolled,.pt-visual .pt-float{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}.nav.scrolled{background:rgba(8,8,12,.94)}}
+/* Topo deste site: seletor de idioma ao lado do botão, sem ocupar espaço */
+.nav-end{position:relative;display:flex;align-items:center}
+.nav-end .lang{position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%)}
+</style>
+<link rel="stylesheet" href="/parceiros.css">
+</head>
+<body>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1981197856191962&amp;ev=PageView&amp;noscript=1"></noscript>
+
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="/" class="logo" data-px="Logo (menu)"><svg class="logo-svg" viewBox="100 15 1820 640" role="img" aria-label="NEX"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
+    <ul id="nav-menu">
+      <li><a href="/#produto" data-px="Menu: Produto">Produto</a></li>
+      <li><a href="/#como-funciona" data-px="Menu: Como funciona">Como funciona</a></li>
+      <li><a href="/#clientes" data-px="Menu: Clientes">Clientes</a></li>
+      <li><a href="/parceiros" aria-current="page" data-px="Menu: Parceiros">Parceiros</a></li>
+    </ul>
+    <div class="nav-end">
+      <div class="lang" data-lang-picker translate="no"></div>
+      <a href="/#demo" class="btn btn-primary btn-sm" data-px="Fale conosco (menu)">Fale conosco</a>
+      <button type="button" class="nav-burger" aria-controls="nav-menu" aria-expanded="false" aria-label="Abrir menu" data-px="Menu mobile"><svg class="b" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg><svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7l-1.4-1.4L9.2 12 2.9 5.7l1.4-1.4 6.3 6.3 6.3-6.3z"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="top">
+<span id="conteudo" tabindex="-1"></span>
+
+<section class="pt-hero2" aria-labelledby="pt-h1">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Especialistas e implantadores</span>
+      <h1 id="pt-h1" data-i18n>Os parceiros NEX estão aqui para <em>ajudar</em>.</h1>
+      <p class="sub">Leads se perdendo, follow-up esquecido, equipe sem processo? Nossos parceiros implantam a NEX no seu negócio, configuram o Agente de IA e as automações e treinam o seu time para vender mais.</p>
+      <div class="acts">
+        <button type="button" class="btn btn-primary" data-hire aria-haspopup="dialog" data-px="Parceiros: Contratar um parceiro">Contratar um parceiro <span class="arr">→</span></button>
+        <a class="pt-link" href="#seja-parceiro" data-px="Parceiros: Torne-se um parceiro (topo)">Torne-se um parceiro <span class="arr">→</span></a>
+      </div>
+    </div>
+    <figure class="pt-visual purple-card" style="margin:0">
+      <img src="/equipe-especializada.webp" alt="Equipe de especialistas reunida em uma sala de reunião, com notebooks sobre a mesa" width="1200" height="1600" style="object-position:50% 62%">
+      <div class="pt-float" id="pt-float" aria-hidden="true"></div>
+    </figure>
+  </div>
+</section>
+
+<section class="pt-band" id="diretorio" aria-labelledby="pt-dir-t">
+  <div class="wrap">
+    <h2 id="pt-dir-t" class="sr-only">Diretório de parceiros</h2>
+    <div class="pt-bar" id="pt-bar" role="group" aria-label="Filtros"></div>
+    <div class="pt-meta"><p id="pt-total" role="status" aria-live="polite" style="margin:0"></p><button type="button" class="pt-reset" id="pt-reset" data-px="Parceiros: Redefinir">Redefinir</button></div>
+    <ul class="pt-tiles" id="pt-grid"></ul>
+    <div class="pt-empty" id="pt-empty" hidden>
+      <b>Sem resultados</b>
+      <p>Nenhum parceiro atende essa combinação de região, país e idioma. Tente outra combinação ou veja a rede completa.</p>
+      <button type="button" class="btn btn-primary" data-reset data-px="Parceiros: Redefinir (sem resultados)">Redefinir filtros</button>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="cta2 rv" id="seja-parceiro" aria-labelledby="pt-cta-t">
+    <span class="eyebrow">Programa de parceiros</span>
+    <h2 id="pt-cta-t">Quer se tornar um Parceiro Oficial?</h2>
+    <p>Se você é consultor, agência ou implantador de CRM, fale com o nosso time e conheça o programa de parceiros da NEX para levar o CRM com IA aos seus clientes.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" id="pt-join" href="https://wa.me/5587988578910" target="_blank" rel="noopener" data-px="Parceiros: Quero ser parceiro" data-px-evento="Contact">Quero ser parceiro <span class="arr">→</span></a>
+      <a class="btn btn-ghost" href="/" data-px="Parceiros: Conhecer a NEX">Conhecer a NEX</a>
+    </div>
+  </section>
+</div>
+</main>
+<footer>
+  <div class="wrap ft-top">
+    <div class="ft-brand">
+      <a href="/" class="logo" data-px="Logo (rodapé)"><svg class="logo-svg" viewBox="100 15 1820 640" role="img" aria-label="NEX"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
+      <p>Inteligência comercial com IA. CRM, funil e atendimento automático para o seu comercial nunca mais dormir.</p>
+    </div>
+    <div class="ft-col">
+      <h4>Produto</h4>
+      <ul><li><a href="/#produto" data-px="Rodapé: Por que a NEX">Por que a NEX</a></li><li><a href="/#como-funciona" data-px="Rodapé: Como funciona">Como funciona</a></li><li><a href="/#clientes" data-px="Rodapé: Clientes">Clientes</a></li><li><a href="/parceiros" data-px="Rodapé: Parceiros">Parceiros</a></li><li><a href="/#demo" data-px="Rodapé: Fale conosco">Fale conosco</a></li></ul>
+    </div>
+    <div class="ft-col">
+      <h4>Informações</h4>
+      <ul><li><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé: Termos de uso">Termos de uso</a></li><li><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé: Política de privacidade">Política de privacidade</a></li><li><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé: LGPD e segurança de dados">LGPD e segurança de dados</a></li><li><a href="#" data-px="Rodapé: Suporte">Suporte</a></li></ul>
+    </div>
+    <div class="ft-col">
+      <h4>Redes sociais</h4>
+      <div class="socials">
+        <a href="https://www.instagram.com/nex_intelligence/" target="_blank" rel="noopener" aria-label="Instagram da NEX" data-px="Instagram (rodapé)"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4.7a5.1 5.1 0 1 0 0 10.2 5.1 5.1 0 0 0 0-10.2zm0 8.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.3-9.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg></a>
+        <a href="https://wa.me/5587988578910" target="_blank" rel="noopener" aria-label="WhatsApp da NEX: +55 87 98857-8910" data-px="WhatsApp (rodapé)" data-px-evento="Contact"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-legal">
+    <div class="wrap">
+      <div>
+        <nav aria-label="Legal"><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé (legal): Termos de uso">Termos de uso</a><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé (legal): Política de privacidade">Política de privacidade</a><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé (legal): LGPD">LGPD</a><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener" data-px="Rodapé (legal): Segurança">Segurança</a><a href="/#demo" data-px="Rodapé (legal): Contato">Contato</a></nav>
+        <p>© 2026 Cnx Marketing e Tecnologia. Todos os direitos reservados. M. Leite Empreendimento em Marketing Ltda · CNPJ 47.633.832/0001-09. NEX é um produto da Conexão | Marketing e Tecnologia.</p>
+      </div>
+      <div class="made">Um produto da<b translate="no">Conexão <span class="made-sep">|</span> Marketing e Tecnologia</b></div>
+    </div>
+  </div>
+</footer>
+
+<dialog class="pt-dialog" id="pt-hire" aria-labelledby="pt-hire-t">
+  <div class="pt-box">
+    <button type="button" class="pt-x" data-close aria-label="Fechar" data-px="Contratar um parceiro: Fechar">✕</button>
+    <div class="pt-steps" aria-hidden="true"><i class="on"></i><i id="pt-s2-bar"></i></div>
+    <form class="pt-step" id="pt-s1" novalidate>
+      <h3 id="pt-hire-t">Solicitar ajuda</h3>
+      <p>Conte sobre a sua empresa e o que você precisa. O time da NEX indica o parceiro certo para o seu caso.</p>
+      <div class="fld"><label for="h-nome">Nome completo</label><input id="h-nome" type="text" autocomplete="name" placeholder="Seu nome"><span class="err">Informe seu nome.</span></div>
+      <div class="pt-row2">
+        <div class="fld"><label for="h-emp">Empresa</label><input id="h-emp" type="text" autocomplete="organization" placeholder="Nome da empresa"><span class="err">Informe a empresa.</span></div>
+        <div class="fld"><label for="h-seg">Segmento</label><select id="h-seg"><option value="">Selecione</option></select><span class="err">Selecione o segmento.</span></div>
+      </div>
+      <div class="fld"><label for="h-need">Como nossos parceiros podem ajudar?</label><textarea id="h-need" placeholder="Ex.: quero implantar a NEX, configurar o Agente de IA e treinar 5 vendedores."></textarea><span class="err">Conte em poucas palavras o que você precisa.</span></div>
+      <div class="acts"><button type="submit" class="btn btn-primary" data-px="Contratar um parceiro: Próximo">Próximo <span class="arr">→</span></button></div>
+    </form>
+    <form class="pt-step" id="pt-s2" novalidate hidden>
+      <h3>Uma última coisa</h3>
+      <p>Deixe o seu contato para o time da NEX e o parceiro falarem com você.</p>
+      <div class="pt-row2">
+        <div class="fld"><label for="h-wa">WhatsApp</label><input id="h-wa" type="tel" inputmode="tel" autocomplete="tel"><span class="err">Informe um WhatsApp com DDD.</span></div>
+        <div class="fld"><label for="h-pais">País</label><select id="h-pais"></select></div>
+      </div>
+      <div class="fld"><label for="h-mail">E-mail <small>(opcional)</small></label><input id="h-mail" type="email" autocomplete="email" placeholder="voce@empresa.com.br"><span class="err">Confira o e-mail.</span></div>
+      <div class="acts"><button type="button" class="btn btn-ghost" id="pt-back" data-px="Contratar um parceiro: Voltar">← Voltar</button><button type="submit" class="btn btn-primary" data-px="Contratar um parceiro: Enviar">Enviar</button></div>
+      <p class="pt-fine" data-i18n>Seus dados seguem a <a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Política de privacidade</a>.</p>
+    </form>
+    <div class="pt-step pt-ok" id="pt-ok" hidden>
+      <span class="ic" aria-hidden="true">✓</span>
+      <h3 id="pt-ok-t" tabindex="-1">Pedido pronto!</h3>
+      <p>Toque no botão para enviar o seu pedido no WhatsApp. O time da NEX responde das 8h às 18h e indica o parceiro ideal para você.</p>
+      <a class="btn btn-wa" id="pt-ok-wa" href="https://wa.me/5587988578910" target="_blank" rel="noopener" data-px="Contratar um parceiro: Enviar no WhatsApp" data-px-evento="Contact">Enviar pedido no WhatsApp →</a>
+    </div>
+  </div>
+</dialog>
+
+<script>NEX_I18N.apply();</script>
+<script src="/nex-nav.js"></script>
+<script src="/parceiros-data.js"></script>
+<script>
+/* Diretório de parceiros: filtros (Regiões, Países, Idiomas), grade de logos e formulário "Contratar um parceiro".
+   Dados em parceiros-data.js; textos dos dados traduzidos ao mostrar, com t(). */
+(() => {
+  const h = window.nexPartners; if (!h) return;
+  const { t } = NEX_I18N;
+  const $ = id => document.getElementById(id);
+  const grid = $('pt-grid'), total = $('pt-total'), empty = $('pt-empty');
+  const STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>';
+  const CHEV = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9.5 12 14.5l5-5 1.4 1.4L12 17.3l-6.4-6.4z"/></svg>';
+
+  // nav com vidro ao rolar (mesmo comportamento da Home)
+  const nav = $('nav'); const onS = () => nav.classList.toggle('scrolled', scrollY > 20);
+  addEventListener('scroll', onS, { passive: true }); onS();
+
+  // selo flutuante do hero
+  const feat = h.ordered()[0];
+  $('pt-float').innerHTML = `${h.logoHTML(feat)}<div><b>${h.esc(feat.name)}</b><small>${h.esc(t(feat.badge))}</small></div>`;
+
+  // ---------- filtros (menus de múltipla escolha) ----------
+  const FILTERS = [
+    { key: 'regions', label: t('Regiões'), opts: h.regions() },
+    { key: 'countries', label: t('Países'), opts: h.countries() },
+    { key: 'languages', label: t('Idiomas'), opts: h.languages() }
+  ];
+  const state = { regions: new Set(), countries: new Set(), languages: new Set() };
+  // valor do filtro em pt-BR (igual aos dados); só o texto mostrado é traduzido
+  $('pt-bar').innerHTML = FILTERS.map(f => `
+    <div class="pt-dd" data-key="${f.key}">
+      <button type="button" class="pt-dd-btn" id="dd-${f.key}" aria-haspopup="listbox" aria-expanded="false" aria-controls="pop-${f.key}">
+        <span class="v ph">${h.esc(f.label)}</span>${CHEV}</button>
+      <ul class="pt-dd-pop" id="pop-${f.key}" role="listbox" aria-multiselectable="true" aria-label="${h.esc(f.label)}" hidden>
+        ${f.opts.map(o => `<li role="none"><label><input type="checkbox" value="${h.esc(o)}" data-px="Filtro: ${h.esc(o)}">${h.esc(t(o))}</label></li>`).join('')}
+      </ul>
+    </div>`).join('');
+
+  let openDD = null;
+  const closeDD = (focusBtn) => {
+    if (!openDD) return;
+    const btn = openDD.querySelector('.pt-dd-btn');
+    openDD.querySelector('.pt-dd-pop').hidden = true; btn.setAttribute('aria-expanded', 'false');
+    if (focusBtn) btn.focus();
+    openDD = null;
+  };
+  const openDropdown = dd => {
+    closeDD(); openDD = dd;
+    dd.querySelector('.pt-dd-pop').hidden = false; dd.querySelector('.pt-dd-btn').setAttribute('aria-expanded', 'true');
+    dd.querySelector('input').focus();
+  };
+  const labelFor = dd => {
+    const f = FILTERS.find(x => x.key === dd.dataset.key), set = state[f.key], v = dd.querySelector('.v'), btn = dd.querySelector('.pt-dd-btn');
+    const names = [...set].map(x => t(x));
+    v.textContent = set.size === 0 ? f.label : set.size === 1 ? names[0] : t('{{n}} selecionadas', { n: set.size });
+    v.classList.toggle('ph', set.size === 0); btn.classList.toggle('on', set.size > 0);
+    btn.setAttribute('aria-label', set.size ? `${f.label}: ${names.join(', ')}` : f.label);
+  };
+  $('pt-bar').addEventListener('click', e => {
+    const btn = e.target.closest('.pt-dd-btn'); if (!btn) return;
+    const dd = btn.closest('.pt-dd'); openDD === dd ? closeDD() : openDropdown(dd);
+  });
+  $('pt-bar').addEventListener('change', e => {
+    const dd = e.target.closest('.pt-dd'), set = state[dd.dataset.key];
+    e.target.checked ? set.add(e.target.value) : set.delete(e.target.value);
+    labelFor(dd); render();
+  });
+  $('pt-bar').addEventListener('keydown', e => {
+    if (!openDD) return;
+    const inputs = [...openDD.querySelectorAll('input')], i = inputs.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const n = inputs.length; inputs[((i < 0 ? 0 : i + (e.key === 'ArrowDown' ? 1 : -1)) + n) % n].focus(); }
+    else if (e.key === 'Escape') { e.preventDefault(); closeDD(true); }
+    else if (e.key === 'Tab' && i === (e.shiftKey ? 0 : inputs.length - 1)) closeDD();
+  });
+  document.addEventListener('click', e => { if (openDD && !openDD.contains(e.target)) closeDD(); });
+
+  function reset() {
+    Object.values(state).forEach(s => s.clear());
+    document.querySelectorAll('.pt-dd input').forEach(i => i.checked = false);
+    document.querySelectorAll('.pt-dd').forEach(labelFor);
+    closeDD(); render();
+  }
+  $('pt-reset').addEventListener('click', reset);
+  empty.addEventListener('click', e => { if (e.target.closest('[data-reset]')) { reset(); $('dd-regions').focus(); } });
+
+  // Dentro de cada filtro vale qualquer opção marcada (OU); entre filtros, todos (E).
+  const matches = p => FILTERS.every(f => !state[f.key].size || p[f.key].some(v => state[f.key].has(v)));
+  const tile = p => `<li><a class="pt-tile${p.featured ? ' is-feat' : ''}" href="${h.profileUrl(p)}" aria-label="${h.esc(p.name)}${p.featured ? ', ' + h.esc(t(p.badge)) : ''}" data-px="Parceiros: perfil ${h.esc(p.name)}">
+      <span class="pt-art">${p.logo ? `<img src="${h.esc(p.logo)}" alt="" loading="lazy">` : `<span class="ini" aria-hidden="true">${h.esc(h.initials(p.name))}</span>`}</span>
+      ${p.featured ? `<span class="pt-seal">${STAR}${h.esc(t(p.badge))}</span>` : ''}
+      <span class="nm">${h.esc(p.name)}</span></a></li>`;
+  function render() {
+    const res = h.ordered().filter(matches);
+    total.innerHTML = res.length === 1 ? t('<0>1</0> resultado encontrado').replace(/<0>(.*?)<\/0>/, '<b>$1</b>')
+      : t('<0>{{n}}</0> resultados encontrados', { n: res.length }).replace(/<0>(.*?)<\/0>/, '<b>$1</b>');
+    grid.innerHTML = res.map(tile).join('');
+    grid.hidden = !res.length; empty.hidden = !!res.length;
+  }
+  render();
+
+  // ---------- formulário "Contratar um parceiro" ----------
+  const dlg = $('pt-hire'), s1 = $('pt-s1'), s2 = $('pt-s2'), ok = $('pt-ok'), wa = $('h-wa');
+  const opt = v => `<option value="${h.esc(v)}">${h.esc(t(v))}</option>`;
+  $('h-seg').insertAdjacentHTML('beforeend', window.NEX_PARTNER_SEGMENTS.map(opt).join(''));
+  $('h-pais').innerHTML = [...new Set(['Brasil', ...h.countries(), 'Outro'])].map(opt).join('');
+  // quem veio em pt-PT começa com Portugal marcado
+  if (NEX_I18N.lang === 'pt-PT' && $('h-pais').querySelector('option[value="Portugal"]')) $('h-pais').value = 'Portugal';
+  wa.placeholder = t('(00) 00000-0000');
+  let last = null;
+  const step = n => {
+    s1.hidden = n !== 1; s2.hidden = n !== 2; ok.hidden = n !== 3;
+    $('pt-s2-bar').classList.toggle('on', n >= 2);
+    const first = (n === 1 ? s1 : n === 2 ? s2 : ok).querySelector('input,select,textarea,#pt-ok-t'); first && first.focus();
+  };
+  document.querySelectorAll('[data-hire]').forEach(b => b.addEventListener('click', () => {
+    last = b; if (ok.hidden === false) { [s1, s2].forEach(f => f.reset()); }
+    step(1); typeof dlg.showModal === 'function' ? dlg.showModal() : dlg.setAttribute('open', ''); step(1);
+  }));
+  const close = () => typeof dlg.close === 'function' ? dlg.close() : (dlg.removeAttribute('open'), last && last.focus());
+  dlg.addEventListener('close', () => last && last.focus());
+  dlg.addEventListener('click', e => { if (e.target === dlg || e.target.closest('[data-close]')) close(); });
+  dlg.addEventListener('input', e => e.target.closest('.fld')?.classList.remove('invalid'));
+  // telefone: mesma regra e máscara do diagnostico.html (com "+", internacional de 8 a 15 dígitos; sem "+", brasileiro com DDD)
+  const phoneOk = v => { const n = v.replace(/\D/g, '').length; return v.startsWith('+') ? n >= 8 && n <= 15 : n >= 10; };
+  wa.addEventListener('input', () => {
+    const val = wa.value;
+    if (val.trimStart().startsWith('+')) {
+      let n = 0;
+      wa.value = '+' + [...val.replace(/[^\d ()-]/g, '').replace(/ {2,}/g, ' ').replace(/^ /, '')].filter(c => !/\d/.test(c) || ++n <= 15).join('');
+      return;
+    }
+    const d = val.replace(/\D/g, '').slice(0, 11);
+    wa.value = d.length > 10 ? `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}` : d.length > 6 ? `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}` : d.length > 2 ? `(${d.slice(0, 2)}) ${d.slice(2)}` : d;
+  });
+  const check = list => {
+    let first = null;
+    list.forEach(([id, good]) => { $(id).closest('.fld').classList.toggle('invalid', !good); if (!good && !first) first = $(id); });
+    if (first) first.focus();
+    return !first;
+  };
+  const v = id => $(id).value.trim();
+  s1.addEventListener('submit', e => {
+    e.preventDefault();
+    if (check([['h-nome', !!v('h-nome')], ['h-emp', !!v('h-emp')], ['h-seg', !!v('h-seg')], ['h-need', v('h-need').length >= 5]])) step(2);
+  });
+  $('pt-back').addEventListener('click', () => step(1));
+  s2.addEventListener('submit', e => {
+    e.preventDefault();
+    const mail = v('h-mail');
+    if (!check([['h-wa', phoneOk(v('h-wa'))], ['h-mail', !mail || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail)]])) return;
+    // sem nome, telefone nem e-mail nos parâmetros do Pixel
+    window.nexTrack && nexTrack('Lead', { content_name: 'Contratar um parceiro', segmento: v('h-seg'), pais: v('h-pais') });
+    const msg = [
+      t('Olá! Vim pela página de parceiros da NEX e quero contratar um parceiro.'), '',
+      t('Nome: {{v}}', { v: v('h-nome') }), t('Empresa: {{v}}', { v: v('h-emp') }),
+      t('Segmento: {{v}}', { v: t(v('h-seg')) }), t('País: {{v}}', { v: t(v('h-pais')) }),
+      t('WhatsApp: {{v}}', { v: v('h-wa') }), mail ? t('E-mail: {{v}}', { v: mail }) : null, '',
+      t('O que preciso: {{v}}', { v: v('h-need') })
+    ].filter(x => x !== null).join('\n');
+    $('pt-ok-wa').href = h.wa(msg);
+    $('pt-ok-t').textContent = t('Pedido pronto, {{nome}}!', { nome: v('h-nome').split(/\s+/)[0] });
+    step(3);
+  });
+
+  $('pt-join').href = h.wa(t('Olá! Quero me tornar um Parceiro Oficial da NEX.'));
+})();
+</script>
+</body>
+</html>

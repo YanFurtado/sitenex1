@@ -1,0 +1,50 @@
+/* Base visual da seção "Rede de parceiros" da Home, ISOLADA dentro de #parceiros.
+   Só é necessária se o outro site NÃO tiver o design system da NEX (.btn, .purple-card, .sec-head, .eyebrow).
+   Tudo aqui vale apenas dentro de <section id="parceiros">, então não altera o resto do site.
+   Fontes usadas: Bricolage Grotesque, Manrope e JetBrains Mono (link do Google Fonts no LEIA-ME). */
+
+#parceiros{
+  --bg:#08080c; --surface:#121219; --surface-2:#191922; --line:rgba(255,255,255,.08); --line-strong:rgba(255,255,255,.16);
+  --fg:#f2f1f6; --muted:#9a98a8; --accent:#7c5cff; --accent-rgb:124,92,255; --accent-2:#2fd3ff; --ok:#3ddc97;
+  --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"Manrope",ui-sans-serif,system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gutter-l:max(16px,env(safe-area-inset-left,0px)); --gutter-r:max(16px,env(safe-area-inset-right,0px));
+  background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  padding-block:50px;
+}
+#parceiros *,#parceiros *::before,#parceiros *::after{box-sizing:border-box}
+#parceiros a{color:inherit;text-decoration:none}
+#parceiros h2,#parceiros h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.035em;line-height:1}
+#parceiros p{margin:0}
+#parceiros .wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+#parceiros .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+#parceiros :focus-visible{outline:2px solid var(--accent-2);outline-offset:3px;border-radius:999px}
+
+/* Cabeçalho da seção */
+#parceiros .sec-head{max-width:760px;margin:0 auto;text-align:center}
+#parceiros .sec-head h2{font-size:clamp(34px,5vw,58px);font-weight:600;margin-top:14px;line-height:1.03}
+#parceiros .sec-head p{margin:18px auto 0;font-size:18px;color:var(--muted);max-width:620px}
+
+/* Cartão roxo */
+#parceiros .purple-card{border:1px solid rgba(91,43,255,.55);border-radius:26px;
+  background:radial-gradient(120% 90% at 0% 0%,rgba(91,43,255,.5),transparent 55%),radial-gradient(90% 80% at 100% 100%,rgba(75,30,240,.4),transparent 60%),linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 30px 90px -30px rgba(91,43,255,.7)}
+
+/* Botões */
+#parceiros .btn{position:relative;display:inline-flex;align-items:center;gap:10px;border-radius:999px;font-weight:600;font-size:15px;padding:14px 26px;transition:box-shadow .35s var(--ease),background .3s,border-color .3s;white-space:nowrap}
+#parceiros .btn-primary{background:var(--accent);color:#fff;overflow:hidden;box-shadow:0 0 0 1px rgba(var(--accent-rgb),.6),0 10px 40px -10px rgba(var(--accent-rgb),.8)}
+#parceiros .btn-primary:hover{box-shadow:0 0 0 1px rgba(var(--accent-rgb),.9),0 14px 60px -6px rgba(var(--accent-rgb),1)}
+#parceiros .btn-primary::after{content:"";position:absolute;inset:0 auto 0 -60%;width:45%;transform:skewX(-14deg);background:rgba(255,255,255,.28);filter:blur(10px);transition:left .8s var(--ease)}
+#parceiros .btn-primary:hover::after{left:130%}
+#parceiros .btn-ghost{border:1px solid var(--line-strong);color:var(--fg);background:rgba(255,255,255,.02)}
+#parceiros .btn-ghost:hover{border-color:rgba(255,255,255,.36);background:rgba(255,255,255,.05)}
+#parceiros .btn .arr{transition:transform .3s var(--ease)}#parceiros .btn:hover .arr{transform:translateX(4px)}
+
+/* Revelação ao rolar (só onde o navegador suporta) */
+@supports (animation-timeline:view()){
+  #parceiros .rv{animation:ptRv linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+  @keyframes ptRv{from{opacity:0;transform:translateY(34px);filter:blur(8px)}}
+}
+@media (prefers-reduced-motion:reduce){#parceiros *,#parceiros *::before,#parceiros *::after{animation:none!important;transition:none!important}}

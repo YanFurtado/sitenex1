@@ -18,6 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="parceiros.css">
 <style>
 /* Layout: dark-first, hero centrado com mockup do produto; daí em diante blocos alinhados à esquerda em grid de 12 colunas */
 :root{
@@ -550,14 +551,16 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
 <header class="nav" id="nav">
   <div class="wrap">
     <a href="#top" class="logo" data-px="Logo (menu)"><svg class="logo-svg" viewBox="100 15 1820 640" role="img" aria-label="NEX"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
-    <ul>
+    <ul id="nav-menu">
       <li><a href="#produto" data-px="Menu: Produto">Produto</a></li>
       <li><a href="#como-funciona" data-px="Menu: Como funciona">Como funciona</a></li>
       <li><a href="#clientes" data-px="Menu: Clientes">Clientes</a></li>
+      <li><a href="/parceiros" data-px="Menu: Parceiros">Parceiros</a></li>
     </ul>
     <div class="nav-end">
       <div class="lang" data-lang-picker translate="no"></div>
       <a href="#demo" class="btn btn-primary btn-sm mag" data-px="Fale conosco (menu)">Fale conosco</a>
+      <button type="button" class="nav-burger" aria-controls="nav-menu" aria-expanded="false" aria-label="Abrir menu" data-px="Menu mobile"><svg class="b" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg><svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7l-1.4-1.4L9.2 12 2.9 5.7l1.4-1.4 6.3 6.3 6.3-6.3z"/></svg></button>
     </div>
   </div>
 </header>
@@ -771,6 +774,48 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
     </div>
   </section>
 
+  <section class="block" id="parceiros" style="padding-top:40px" aria-labelledby="pt-title">
+    <div class="wrap">
+      <div class="head center rv">
+        <span class="eyebrow">Rede de parceiros</span>
+        <h2 id="pt-title">Quem implanta a NEX com você.</h2>
+        <p>Parceiros certificados configuram o CRM, o Agente de IA e as automações do jeito do seu negócio, e treinam o seu time para usar tudo desde o primeiro dia.</p>
+      </div>
+      <div class="pt-home">
+        <article class="pt-feat purple-card rv" id="pt-home-feat" aria-label="Parceiro oficial em destaque"></article>
+        <article class="pt-more rv" aria-labelledby="pt-more-t">
+          <div class="pt-stack"><ul id="pt-home-stack" aria-hidden="true"></ul><span class="pt-count" id="pt-home-count">Parceiros homologados</span></div>
+          <h3 id="pt-more-t">Explore nossa rede de especialistas</h3>
+          <p>Consultores e agências certificados pela NEX, cada um focado num nicho: clínicas, imobiliárias, e-commerce, vendas B2B e serviços. Filtre por especialidade e encontre quem já conhece o seu mercado.</p>
+          <a class="btn btn-ghost" href="/parceiros" data-px="Parceiros: Encontrar um parceiro (home)">Encontrar um parceiro <span class="arr">→</span></a>
+        </article>
+      </div>
+      <script src="parceiros-data.js"></script>
+      <script>
+      /* Seção "Rede de parceiros": card do parceiro em destaque + convite para o diretório (dados em parceiros-data.js).
+         Montada antes do NEX_I18N.apply() para os links levarem o ?lang= junto; os textos dos dados são traduzidos aqui, com t(). */
+      (() => {
+        const list = window.NEX_PARTNERS, h = window.nexPartners, { t } = NEX_I18N;
+        const feat = document.getElementById('pt-home-feat');
+        if (!list || !h || !feat) return;
+        const p = list.find(x => x.featured) || list[0];
+        const others = list.filter(x => x !== p);
+        feat.innerHTML = `
+          <span class="pt-seal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>${t('Parceiro Oficial em Destaque')}</span>
+          <div class="pt-head">${h.logoHTML(p)}<div><h3>${h.esc(p.name)}</h3><span class="pt-loc">${h.esc(t(p.location))}</span></div></div>
+          <p>${h.esc(t(p.shortDescription))}</p>
+          <ul class="pt-tags" aria-label="${t('Especialidades')}">${p.specialties.map(s => `<li>${h.esc(t(s))}</li>`).join('')}</ul>
+          <div class="pt-acts">
+            <a class="btn btn-primary" href="${h.esc(h.contactHref(p))}" target="_blank" rel="noopener" data-px="Parceiro ${h.esc(p.name)} (Home)" data-px-evento="Contact">${t('Falar com a {{nome}}', { nome: h.esc(p.name.replace(/^Assessoria\s+/, '')) })} <span class="arr">→</span></a>
+            <a class="btn btn-ghost" href="${h.profileUrl(p)}" data-px="Parceiros: Ver detalhes ${h.esc(p.name)} (home)">${t('Ver detalhes')}</a>
+          </div>`;
+        document.getElementById('pt-home-stack').innerHTML = others.slice(0, 5).map(x => `<li>${h.logoHTML(x)}</li>`).join('');
+        document.getElementById('pt-home-count').textContent = others.length === 1 ? t('+1 parceiro homologado') : t('+{{n}} parceiros homologados', { n: others.length });
+      })();
+      </script>
+    </div>
+  </section>
+
   <div class="wrap">
     <section class="final rv" id="demo">
       <h2 id="final-h" data-i18n>Seu próximo cliente já está chamando. <span class="hl-y">Quem vai responder?</span></h2>
@@ -791,7 +836,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
     </div>
     <div class="ft-col">
       <h4>Produto</h4>
-      <ul><li><a href="#produto" data-px="Rodapé: Por que a NEX">Por que a NEX</a></li><li><a href="#como-funciona" data-px="Rodapé: Como funciona">Como funciona</a></li><li><a href="#clientes" data-px="Rodapé: Clientes">Clientes</a></li><li><a href="#demo" data-px="Rodapé: Fale conosco">Fale conosco</a></li></ul>
+      <ul><li><a href="#produto" data-px="Rodapé: Por que a NEX">Por que a NEX</a></li><li><a href="#como-funciona" data-px="Rodapé: Como funciona">Como funciona</a></li><li><a href="#clientes" data-px="Rodapé: Clientes">Clientes</a></li><li><a href="/parceiros" data-px="Rodapé: Parceiros">Parceiros</a></li><li><a href="#demo" data-px="Rodapé: Fale conosco">Fale conosco</a></li></ul>
     </div>
     <div class="ft-col">
       <h4>Informações</h4>
@@ -816,6 +861,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
   </div>
 </footer>
 <script>NEX_I18N.apply();</script>
+<script src="nex-nav.js"></script>
 <script>
 /* Faixa de logos: loop infinito sem buracos. Duplica as marcas até cobrir a tela e anima por pixels (velocidade constante). */
 (() => {

@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/parceiros", "destination": "/parceiros.html" },
+    { "source": "/parceiros/:slug", "destination": "/parceiro.html" }
+  ]
+}
